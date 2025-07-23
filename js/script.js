@@ -1,3 +1,5 @@
+import mariadb from "mariadb";
+
 fetch('https://www.jma.go.jp/bosai/forecast/data/overview_forecast/016000.json')
   .then(response => response.json())
   .then(data => {
@@ -8,7 +10,7 @@ fetch('https://www.jma.go.jp/bosai/forecast/data/overview_forecast/016000.json')
     console.error('データの取得に失敗しちゃった…', error);
   });
 
-const mariadb = require('mariadb');
+//const mariadb = require('mariadb');
 
 const pool = mariadb.createPool({
     host: 'localhost',
