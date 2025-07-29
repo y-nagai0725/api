@@ -3,7 +3,8 @@ const selectedCity = localStorage.getItem("selectedCity");
 if (selectedCity) {
   console.log("既に選択しているよ");
   document.querySelector(".test2").textContent = selectedCity;
-  getWeatherData(selectedCity);
+  getOverviewWeatherData(selectedCity);
+  getDetailWeatherData(selectedCity);
   Array.from(document.querySelector(".select").options).forEach(option => {
     const value = option.value;
     if(selectedCity === value){
@@ -20,15 +21,28 @@ document.querySelector(".select").addEventListener("change", () => {
   const city = document.querySelector(".select").value;
   document.querySelector(".test2").textContent = city;
   localStorage.setItem("selectedCity", city);
-  getWeatherData(city);
+  getOverviewWeatherData(city);
+  getDetailWeatherData(city);
 });
 
-function getWeatherData(cityNumber) {
+function getOverviewWeatherData(cityNumber) {
   fetch(`https://www.jma.go.jp/bosai/forecast/data/overview_forecast/${cityNumber}.json`)
     .then(response => response.json())
     .then(data => {
       //console.log(data);
       document.querySelector(".test").textContent = data.text;
+    })
+    .catch(error => {
+      console.error('データの取得に失敗しちゃった…', error);
+    });
+}
+
+
+function getDetailWeatherData(cityNumber) {
+  fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${cityNumber}.json`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
     })
     .catch(error => {
       console.error('データの取得に失敗しちゃった…', error);
