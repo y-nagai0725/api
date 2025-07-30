@@ -122,4 +122,29 @@ meter {
 /* Remove details summary webkit styles */
 ::-webkit-details-marker {
   display: none;
+}
+
+.overviewTable {
+  width: 70%;
+  display: grid;
+  grid-template-columns: -webkit-max-content 1fr;
+  grid-template-columns: max-content 1fr;
+  margin-inline: auto;
+}
+.overviewTable dt {
+  padding: 10px;
+  border-left: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+.overviewTable dt:last-of-type {
+  border-bottom: 1px solid #ccc;
+}
+.overviewTable dd {
+  padding: 10px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+.overviewTable dd:last-of-type {
+  border-bottom: 1px solid #ccc;
 }/*# sourceMappingURL=style.css.map */

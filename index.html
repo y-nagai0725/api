@@ -5,13 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <p class="test"></p>
-  <p class="test2"></p>
   <select class="select" name="select">
-    <option value="" selected></option>
+    <option value="" selected>選択してください</option>
     <option value="011000">宗谷地方</option>
     <option value="012000">上川・留萌地方</option>
     <option value="016000">石狩・空知・後志地方</option>
@@ -66,6 +65,14 @@
     <option value="460100">鹿児島</option>
     <option value="471000">沖縄本島</option>
   </select>
+  <dl class="overviewTable">
+    <dt>観測気象台</dt>
+    <dd class="publisher"></dd>
+    <dt>観測時間</dt>
+    <dd class="reportDateTime"></dd>
+    <dt>概要</dt>
+    <dd class="overviewText"></dd>
+  </dl>
   <script src="js/script.js"></script>
 </body>
 

@@ -1,1 +1,29 @@
 @use "../global" as *;
+
+.overviewTable {
+  width: 70%;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  margin-inline: auto;
+
+  dt {
+    padding: 10px;
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+
+    &:last-of-type {
+      border-bottom: 1px solid #ccc;
+    }
+  }
+
+  dd {
+    padding: 10px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+
+    &:last-of-type {
+      border-bottom: 1px solid #ccc;
+    }
+  }
+}
