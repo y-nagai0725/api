@@ -30,7 +30,7 @@ function getOverviewWeatherData(cityNumber) {
   fetch(`https://www.jma.go.jp/bosai/forecast/data/overview_forecast/${cityNumber}.json`)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      //console.log(data);
       const publisher = data.publishingOffice;
       const reportDateTime = data.reportDatetime;
       //const area = data.targetArea;
@@ -51,6 +51,19 @@ function getDetailWeatherData(cityNumber) {
     .then(response => response.json())
     .then(data => {
       console.log(data);
+      const weatherInformation = data[0].timeSeries[0].areas;
+      const weatherTimeDefines = data[0].timeSeries[0].timeDefines
+
+      console.log(`日付：${weatherTimeDefines[0]},${weatherTimeDefines[1]},${weatherTimeDefines[2]}`);
+
+      weatherInformation.forEach(information => {
+        const areaName = information.area.name;
+        const weathers = information.weathers;
+
+        console.log(`場所：${areaName}`);
+        console.log(`天気：${weathers[0]},${weathers[1]},${weathers[2]}`);
+
+      });
     })
     .catch(error => {
       console.error('データの取得に失敗しちゃった…', error);
