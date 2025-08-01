@@ -147,4 +147,42 @@ meter {
 }
 .overviewTable dd:last-of-type {
   border-bottom: 1px solid #ccc;
+}
+
+.dark-mode-button {
+  padding: unset;
+  margin: unset;
+  font: unset;
+  -webkit-appearance: unset;
+     -moz-appearance: unset;
+          appearance: unset;
+  background-color: unset;
+  border: unset;
+  display: block;
+  width: 80px;
+  height: 40px;
+  border-radius: 100vmax;
+  border: 2px solid #ccc;
+  position: relative;
+}
+.dark-mode-button::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  height: 90%;
+  aspect-ratio: 1/1;
+  border-radius: 100vmax;
+  background-color: gray;
+  -webkit-transition: background-color 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  transition: background-color 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out, -webkit-transform 0.3s ease-out;
+}
+.dark-mode-button:checked::before {
+  -webkit-transform: translate(100%, -50%);
+          transform: translate(100%, -50%);
+  background-color: lightgreen;
 }/*# sourceMappingURL=style.css.map */
