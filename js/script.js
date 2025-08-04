@@ -1,7 +1,9 @@
 const selectedCity = localStorage.getItem("selectedCity");
+const mode = localStorage.getItem("mode");
+const darkModeButton = document.querySelector(".dark-mode-button");
+const selectBox = document.querySelector(".select");
 
 if (selectedCity) {
-  console.log("既に選択しているよ");
   getOverviewWeatherData(selectedCity);
   getDetailWeatherData(selectedCity);
   Array.from(document.querySelector(".select").options).forEach(option => {
@@ -14,9 +16,28 @@ if (selectedCity) {
   console.log("まだ選択していないよ");
 }
 
-document.querySelector(".select").addEventListener("change", () => {
-  console.log("change!!");
-  const city = document.querySelector(".select").value;
+if(mode){
+  console.log("既にmode選択しているよ");
+  if(mode === "dark"){
+    document.querySelector("html").classList.add("dark-mode");
+    darkModeButton.checked = true;
+  }
+}
+
+darkModeButton.addEventListener("change", () => {
+  console.log("mode:change!!");
+  if (darkModeButton.checked) {
+    document.querySelector("html").classList.add("dark-mode");
+    localStorage.setItem("mode", "dark");
+  } else {
+    document.querySelector("html").classList.remove("dark-mode");
+    localStorage.setItem("mode", "light");
+  }
+});
+
+selectBox.addEventListener("change", () => {
+  console.log("select:change!!");
+  const city = selectBox.value;
   if (city === "") {
     localStorage.removeItem("selectedCity");
   } else {

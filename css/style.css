@@ -124,6 +124,16 @@ meter {
   display: none;
 }
 
+html {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+html.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
 .overviewTable {
   width: 70%;
   display: grid;

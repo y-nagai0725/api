@@ -21,7 +21,7 @@
   "[css]": {
       "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
   },
-  "liveSassCompile.settings.showOutputWindowOn": "Warning",
+  "liveSassCompile.settings.showOutputWindowOn": "Error",
   "editor.guides.bracketPairs": "active",
   "editor.unicodeHighlight.includeComments": true,
   "files.trimTrailingWhitespace": true,

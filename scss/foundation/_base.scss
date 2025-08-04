@@ -1,1 +1,11 @@
 @use "../global" as *;
+
+html {
+  background-color: $white;
+  color: $black;
+}
+
+html.dark-mode {
+  background-color: $black;
+  color: $white;
+}
