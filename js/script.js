@@ -207,7 +207,7 @@ function getDetailWeatherData(cityNumber) {
       //特定地域（県庁所在地？）の名称、週間最高気温、週間最低気温
       const weeklyWeatherTempsArea = data[1].timeSeries[1].areas[0].area.name;
       const weeklyWeatherTempsMax = data[1].timeSeries[1].areas[0].tempsMax;
-      const weeklyWeatherTempsMin = data[1].timeSeries[1].areas[0].tempsMax;
+      const weeklyWeatherTempsMin = data[1].timeSeries[1].areas[0].tempsMin;
 
 
       console.log(publishingOffice);
@@ -222,6 +222,37 @@ function getDetailWeatherData(cityNumber) {
       console.log(weeklyWeatherTempsArea);
       console.log(weeklyWeatherTempsMax);
       console.log(weeklyWeatherTempsMin);
+
+      document.querySelectorAll(".date-item").forEach((item, index) => {
+        item.textContent = weeklyTimeDefines[index];
+      });
+
+      const imageurl = 'https://www.jma.go.jp/bosai/forecast/img/';
+      document.querySelectorAll(".weather-image").forEach((image, index) => {
+        image.src = imageurl + weatherCodes[weeklyWeatherCodes[index]][0];
+        image.alt = weatherCodes[weeklyWeatherCodes[index]][1];
+      });
+
+      document.querySelectorAll(".pops-item").forEach((item, index) => {
+        const pop = weeklyWeatherPops[index];
+        item.textContent = pop === "" ? "/" : pop;
+      });
+
+      document.querySelectorAll(".prefectural-capital").forEach(name => {
+        name.textContent = weeklyWeatherTempsArea;
+      });
+
+      document.querySelectorAll(".temps-max-item").forEach((item, index) => {
+        const tempMax = weeklyWeatherTempsMax[index];
+        item.textContent = tempMax === "" ? "/" : tempMax;
+      });
+
+      document.querySelectorAll(".temps-min-item").forEach((item, index) => {
+        const tempMin = weeklyWeatherTempsMin[index];
+        item.textContent = tempMin === "" ? "/" : tempMin;
+      });
+
+
     })
     .catch(error => {
       console.error('データの取得に失敗しちゃった…', error);
