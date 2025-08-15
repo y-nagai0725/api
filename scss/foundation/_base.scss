@@ -1,11 +1,18 @@
 @use "../global" as *;
 
 html {
-  background-color: $white;
-  color: $black;
+  --background-color: #{$white};
+  --font-color: #{$black};
+  background-color: var(--background-color);
+  color: var(--font-color);
 }
 
 html.dark-mode {
-  background-color: $black;
-  color: $white;
+  --background-color: #{$black};
+  --font-color: #{$white};
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
 }

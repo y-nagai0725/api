@@ -125,38 +125,153 @@ meter {
 }
 
 html {
-  background-color: #ffffff;
-  color: #000000;
+  --background-color: #ffffff;
+  --font-color: #000000;
+  background-color: var(--background-color);
+  color: var(--font-color);
 }
 
 html.dark-mode {
-  background-color: #000000;
-  color: #ffffff;
+  --background-color: #000000;
+  --font-color: #ffffff;
+}
+
+img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .overviewTable {
   width: 70%;
+  margin-inline: auto;
+  margin-bottom: 80px;
   display: grid;
   grid-template-columns: -webkit-max-content 1fr;
   grid-template-columns: max-content 1fr;
-  margin-inline: auto;
 }
 .overviewTable dt {
   padding: 10px;
-  border-left: 1px solid #ccc;
-  border-top: 1px solid #ccc;
+  border-left: 1px solid var(--font-color);
+  border-top: 1px solid var(--font-color);
 }
 .overviewTable dt:last-of-type {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--font-color);
 }
 .overviewTable dd {
   padding: 10px;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-top: 1px solid #ccc;
+  border-left: 1px solid var(--font-color);
+  border-right: 1px solid var(--font-color);
+  border-top: 1px solid var(--font-color);
 }
 .overviewTable dd:last-of-type {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--font-color);
+}
+
+.weekly-weather {
+  width: 70%;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: [heading-item] 1fr repeat(7, 1fr);
+  grid-template-rows: [date-item] 1fr [weather-item] 3fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
+}
+.weekly-weather .heading,
+.weekly-weather .date,
+.weekly-weather .weather,
+.weekly-weather .pops,
+.weekly-weather .temps-max,
+.weekly-weather .temps-min {
+  display: contents;
+}
+.weekly-weather .heading-item {
+  grid-column: heading-item;
+  border-top: 1px solid var(--font-color);
+  border-left: 1px solid var(--font-color);
+}
+.weekly-weather .heading-item:last-of-type {
+  border-bottom: 1px solid var(--font-color);
+}
+.weekly-weather .date-item,
+.weekly-weather .weather-item,
+.weekly-weather .pops-item,
+.weekly-weather .temps-max-item,
+.weekly-weather .temps-min-item {
+  border-top: 1px solid var(--font-color);
+  border-left: 1px solid var(--font-color);
+}
+.weekly-weather .date-item:last-of-type,
+.weekly-weather .weather-item:last-of-type,
+.weekly-weather .pops-item:last-of-type,
+.weekly-weather .temps-max-item:last-of-type,
+.weekly-weather .temps-min-item:last-of-type {
+  border-right: 1px solid var(--font-color);
+}
+.weekly-weather .date-item:nth-of-type(1),
+.weekly-weather .weather-item:nth-of-type(1),
+.weekly-weather .pops-item:nth-of-type(1),
+.weekly-weather .temps-max-item:nth-of-type(1),
+.weekly-weather .temps-min-item:nth-of-type(1) {
+  grid-column: 2/3;
+}
+.weekly-weather .date-item:nth-of-type(2),
+.weekly-weather .weather-item:nth-of-type(2),
+.weekly-weather .pops-item:nth-of-type(2),
+.weekly-weather .temps-max-item:nth-of-type(2),
+.weekly-weather .temps-min-item:nth-of-type(2) {
+  grid-column: 3/4;
+}
+.weekly-weather .date-item:nth-of-type(3),
+.weekly-weather .weather-item:nth-of-type(3),
+.weekly-weather .pops-item:nth-of-type(3),
+.weekly-weather .temps-max-item:nth-of-type(3),
+.weekly-weather .temps-min-item:nth-of-type(3) {
+  grid-column: 4/5;
+}
+.weekly-weather .date-item:nth-of-type(4),
+.weekly-weather .weather-item:nth-of-type(4),
+.weekly-weather .pops-item:nth-of-type(4),
+.weekly-weather .temps-max-item:nth-of-type(4),
+.weekly-weather .temps-min-item:nth-of-type(4) {
+  grid-column: 5/6;
+}
+.weekly-weather .date-item:nth-of-type(5),
+.weekly-weather .weather-item:nth-of-type(5),
+.weekly-weather .pops-item:nth-of-type(5),
+.weekly-weather .temps-max-item:nth-of-type(5),
+.weekly-weather .temps-min-item:nth-of-type(5) {
+  grid-column: 6/7;
+}
+.weekly-weather .date-item:nth-of-type(6),
+.weekly-weather .weather-item:nth-of-type(6),
+.weekly-weather .pops-item:nth-of-type(6),
+.weekly-weather .temps-max-item:nth-of-type(6),
+.weekly-weather .temps-min-item:nth-of-type(6) {
+  grid-column: 7/8;
+}
+.weekly-weather .date-item:nth-of-type(7),
+.weekly-weather .weather-item:nth-of-type(7),
+.weekly-weather .pops-item:nth-of-type(7),
+.weekly-weather .temps-max-item:nth-of-type(7),
+.weekly-weather .temps-min-item:nth-of-type(7) {
+  grid-column: 8/9;
+}
+.weekly-weather .date-item {
+  grid-row: date-item;
+}
+.weekly-weather .weather-item {
+  grid-row: weather-item;
+  display: grid;
+  place-content: center;
+}
+.weekly-weather .pops-item {
+  grid-row: pops-item;
+}
+.weekly-weather .temps-max-item {
+  grid-row: temps-max-item;
+}
+.weekly-weather .temps-min-item {
+  grid-row: temps-min-item;
+  border-bottom: 1px solid var(--font-color);
 }
 
 .dark-mode-button {
@@ -172,7 +287,7 @@ html.dark-mode {
   width: 80px;
   height: 40px;
   border-radius: 100vmax;
-  border: 2px solid #ccc;
+  border: 2px solid var(--font-color);
   position: relative;
 }
 .dark-mode-button::before {
