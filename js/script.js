@@ -233,9 +233,18 @@ function getDetailWeatherData(cityNumber) {
         image.alt = weatherCodes[weeklyWeatherCodes[index]][1];
       });
 
+      document.querySelectorAll(".weather-text").forEach((text, index) => {
+        text.textContent = weatherCodes[weeklyWeatherCodes[index]][1];
+      });
+
+      document.querySelectorAll(".reliability-item").forEach((item, index) => {
+        const reliability = weeklyWeatherReliabilities[index];
+        item.textContent = reliability === "" ? "-" : reliability;
+      });
+
       document.querySelectorAll(".pops-item").forEach((item, index) => {
         const pop = weeklyWeatherPops[index];
-        item.textContent = pop === "" ? "/" : pop;
+        item.textContent = pop === "" ? "-" : pop;
       });
 
       document.querySelectorAll(".prefectural-capital").forEach(name => {
@@ -244,12 +253,12 @@ function getDetailWeatherData(cityNumber) {
 
       document.querySelectorAll(".temps-max-item").forEach((item, index) => {
         const tempMax = weeklyWeatherTempsMax[index];
-        item.textContent = tempMax === "" ? "/" : tempMax;
+        item.textContent = tempMax === "" ? "-" : tempMax;
       });
 
       document.querySelectorAll(".temps-min-item").forEach((item, index) => {
         const tempMin = weeklyWeatherTempsMin[index];
-        item.textContent = tempMin === "" ? "/" : tempMin;
+        item.textContent = tempMin === "" ? "-" : tempMin;
       });
 
 

@@ -173,11 +173,12 @@ img {
   margin-inline: auto;
   display: grid;
   grid-template-columns: [heading-item] 1fr repeat(7, 1fr);
-  grid-template-rows: [date-item] 1fr [weather-item] 3fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
+  grid-template-rows: [date-item] 1fr [weather-item] 3fr [reliability-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
 }
 .weekly-weather .heading,
 .weekly-weather .date,
 .weekly-weather .weather,
+.weekly-weather .reliability,
 .weekly-weather .pops,
 .weekly-weather .temps-max,
 .weekly-weather .temps-min {
@@ -193,14 +194,18 @@ img {
 }
 .weekly-weather .date-item,
 .weekly-weather .weather-item,
+.weekly-weather .reliability-item,
 .weekly-weather .pops-item,
 .weekly-weather .temps-max-item,
 .weekly-weather .temps-min-item {
+  display: grid;
+  place-content: center;
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
 }
 .weekly-weather .date-item:last-of-type,
 .weekly-weather .weather-item:last-of-type,
+.weekly-weather .reliability-item:last-of-type,
 .weekly-weather .pops-item:last-of-type,
 .weekly-weather .temps-max-item:last-of-type,
 .weekly-weather .temps-min-item:last-of-type {
@@ -208,6 +213,7 @@ img {
 }
 .weekly-weather .date-item:nth-of-type(1),
 .weekly-weather .weather-item:nth-of-type(1),
+.weekly-weather .reliability-item:nth-of-type(1),
 .weekly-weather .pops-item:nth-of-type(1),
 .weekly-weather .temps-max-item:nth-of-type(1),
 .weekly-weather .temps-min-item:nth-of-type(1) {
@@ -215,6 +221,7 @@ img {
 }
 .weekly-weather .date-item:nth-of-type(2),
 .weekly-weather .weather-item:nth-of-type(2),
+.weekly-weather .reliability-item:nth-of-type(2),
 .weekly-weather .pops-item:nth-of-type(2),
 .weekly-weather .temps-max-item:nth-of-type(2),
 .weekly-weather .temps-min-item:nth-of-type(2) {
@@ -222,6 +229,7 @@ img {
 }
 .weekly-weather .date-item:nth-of-type(3),
 .weekly-weather .weather-item:nth-of-type(3),
+.weekly-weather .reliability-item:nth-of-type(3),
 .weekly-weather .pops-item:nth-of-type(3),
 .weekly-weather .temps-max-item:nth-of-type(3),
 .weekly-weather .temps-min-item:nth-of-type(3) {
@@ -229,6 +237,7 @@ img {
 }
 .weekly-weather .date-item:nth-of-type(4),
 .weekly-weather .weather-item:nth-of-type(4),
+.weekly-weather .reliability-item:nth-of-type(4),
 .weekly-weather .pops-item:nth-of-type(4),
 .weekly-weather .temps-max-item:nth-of-type(4),
 .weekly-weather .temps-min-item:nth-of-type(4) {
@@ -236,6 +245,7 @@ img {
 }
 .weekly-weather .date-item:nth-of-type(5),
 .weekly-weather .weather-item:nth-of-type(5),
+.weekly-weather .reliability-item:nth-of-type(5),
 .weekly-weather .pops-item:nth-of-type(5),
 .weekly-weather .temps-max-item:nth-of-type(5),
 .weekly-weather .temps-min-item:nth-of-type(5) {
@@ -243,6 +253,7 @@ img {
 }
 .weekly-weather .date-item:nth-of-type(6),
 .weekly-weather .weather-item:nth-of-type(6),
+.weekly-weather .reliability-item:nth-of-type(6),
 .weekly-weather .pops-item:nth-of-type(6),
 .weekly-weather .temps-max-item:nth-of-type(6),
 .weekly-weather .temps-min-item:nth-of-type(6) {
@@ -250,6 +261,7 @@ img {
 }
 .weekly-weather .date-item:nth-of-type(7),
 .weekly-weather .weather-item:nth-of-type(7),
+.weekly-weather .reliability-item:nth-of-type(7),
 .weekly-weather .pops-item:nth-of-type(7),
 .weekly-weather .temps-max-item:nth-of-type(7),
 .weekly-weather .temps-min-item:nth-of-type(7) {
@@ -260,8 +272,12 @@ img {
 }
 .weekly-weather .weather-item {
   grid-row: weather-item;
-  display: grid;
-  place-content: center;
+}
+.weekly-weather .weather-item .weather-text {
+  text-align: center;
+}
+.weekly-weather .reliability-item {
+  grid-row: reliability-item;
 }
 .weekly-weather .pops-item {
   grid-row: pops-item;

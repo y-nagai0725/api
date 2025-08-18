@@ -34,11 +34,12 @@
   margin-inline: auto;
   display: grid;
   grid-template-columns: [heading-item] 1fr repeat(7, 1fr);
-  grid-template-rows: [date-item] 1fr [weather-item] 3fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
+  grid-template-rows: [date-item] 1fr [weather-item] 3fr [reliability-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
 
   .heading,
   .date,
   .weather,
+  .reliability,
   .pops,
   .temps-max,
   .temps-min {
@@ -57,9 +58,12 @@
 
   .date-item,
   .weather-item,
+  .reliability-item,
   .pops-item,
   .temps-max-item,
   .temps-min-item {
+    display: grid;
+    place-content: center;
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
 
@@ -79,11 +83,16 @@
   }
   .weather-item {
     grid-row: weather-item;
-    display: grid;
-    place-content: center;
 
     .weather-image {
     }
+
+    .weather-text {
+      text-align: center;
+    }
+  }
+  .reliability-item {
+    grid-row: reliability-item;
   }
   .pops-item {
     grid-row: pops-item;
