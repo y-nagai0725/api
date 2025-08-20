@@ -5,11 +5,12 @@ html {
   --font-color: #{$black};
   background-color: var(--background-color);
   color: var(--font-color);
-}
+  font-family: $noto-sans;
 
-html.dark-mode {
-  --background-color: #{$black};
-  --font-color: #{$white};
+  &.dark-mode {
+    --background-color: #{$black};
+    --font-color: #{$white};
+  }
 }
 
 img {

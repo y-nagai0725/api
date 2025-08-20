@@ -26,10 +26,7 @@
 * JavaScript
 
 ## 使用フォント
-* 和文フォント
-  * [Noto Sans JP](https://fonts.google.com/noto/specimen/Noto+Sans+JP)
-* 欧文フォント
-  * [Poppins](https://fonts.google.com/specimen/Poppins)
+* [Noto Sans JP](https://fonts.google.com/noto/specimen/Noto+Sans+JP)
 
 ## デザインカンプ
 [Figmaページ（閲覧のみ可能です）](aaaa)
