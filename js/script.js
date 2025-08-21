@@ -197,7 +197,72 @@ function getDetailWeatherData(cityNumber) {
       const publishingOffice = data[1].publishingOffice;
       const reportDatetime = data[1].reportDatetime;
 
-      //週間予報データ
+      console.log("発表時刻:" + reportDatetime);
+
+      let reportDatetimeType;
+      if (reportDatetime.includes("T05")) {
+        reportDatetimeType = 1;
+      } else if (reportDatetime.includes("T11")) {
+        reportDatetimeType = 2;
+      } else {
+        reportDatetimeType = 3;
+      }
+
+      //今日、明日のデータ
+      //天気
+      const todayWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[0];
+      const tomorrowWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[1];
+
+      //風速
+      const todayWave = data[0].timeSeries[0].areas[0].waves[0];
+      const tomorrowWave = data[0].timeSeries[0].areas[0].waves[1];
+
+      //降水確率
+      const popsTimeDefines = data[0].timeSeries[1].timeDefines;
+      const pops = data[0].timeSeries[1].areas[0].pops;
+      let todayPops, tomorrowPops;
+      if (popsTimeDefines[0].includes("T00")) {
+        todayPops = `${pops[0]}/${pops[1]}/${pops[2]}/${pops[3]}`;
+        tomorrowPops = `${pops[4]}/-/-/-`;
+      } else if (popsTimeDefines[0].includes("T06")) {
+        todayPops = `-/${pops[0]}/${pops[1]}/${pops[2]}`;
+        tomorrowPops = `${pops[3]}/${pops[4]}/-/-`;
+      } else if (popsTimeDefines[0].includes("T12")) {
+        todayPops = `-/-/${pops[0]}/${pops[1]}`;
+        tomorrowPops = `${pops[2]}/${pops[3]}/${pops[4]}/-`;
+      } else {
+        todayPops = `-/-/-/${pops[0]}`;
+        tomorrowPops = `${pops[1]}/${pops[2]}/${pops[3]}/${pops[4]}`;
+      }
+      //console.log(todayPops);
+      //console.log(tomorrowPops);
+
+      //最高気温、最低気温
+      let todayTempMax, tomorrowTempMax;
+      let todayTempMin, tomorrowTempMin;
+      if (reportDatetimeType === 1) {
+
+      } else if (reportDatetimeType === 2) {
+        todayTempMax = data[0].timeSeries[2].areas[0].temps[0];
+        todayTempMin = "-";
+        tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[3];
+        tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[2];
+      } else {
+        todayTempMax = "-";
+        todayTempMin = "-";
+        tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[1];
+        tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[0];
+      }
+
+      console.log(todayTempMax);
+      console.log(todayTempMin);
+      console.log(tomorrowTempMax);
+      console.log(tomorrowTempMin);
+
+
+
+
+      //週間予報予報データ
       const weeklyWeatherArea = data[1].timeSeries[0].areas[0].area.name;
       const weeklyWeatherCodes = data[1].timeSeries[0].areas[0].weatherCodes;
       const weeklyWeatherPops = data[1].timeSeries[0].areas[0].pops;
@@ -210,18 +275,18 @@ function getDetailWeatherData(cityNumber) {
       const weeklyWeatherTempsMin = data[1].timeSeries[1].areas[0].tempsMin;
 
 
-      console.log(publishingOffice);
-      console.log(reportDatetime);
+      // console.log(publishingOffice);
+      // console.log(reportDatetime);
 
-      console.log(weeklyWeatherArea);
-      console.log(weeklyWeatherCodes);
-      console.log(weeklyWeatherPops);
-      console.log(weeklyWeatherReliabilities);
-      console.log(weeklyTimeDefines);
+      // console.log(weeklyWeatherArea);
+      // console.log(weeklyWeatherCodes);
+      // console.log(weeklyWeatherPops);
+      // console.log(weeklyWeatherReliabilities);
+      // console.log(weeklyTimeDefines);
 
-      console.log(weeklyWeatherTempsArea);
-      console.log(weeklyWeatherTempsMax);
-      console.log(weeklyWeatherTempsMin);
+      // console.log(weeklyWeatherTempsArea);
+      // console.log(weeklyWeatherTempsMax);
+      // console.log(weeklyWeatherTempsMin);
 
       document.querySelectorAll(".date-item").forEach((item, index) => {
         item.textContent = weeklyTimeDefines[index];
