@@ -229,13 +229,13 @@ function getDetailWeatherData(cityNumber) {
         tomorrowPops = `${pops[3]}/${pops[4]}/-/-`;
       } else if (popsTimeDefines[0].includes("T12")) {
         todayPops = `-/-/${pops[0]}/${pops[1]}`;
-        tomorrowPops = `${pops[2]}/${pops[3]}/${pops[4]}/-`;
+        tomorrowPops = `${pops[2]}/${pops[3]}/${pops[4]}/${pops[5]}`;
       } else {
         todayPops = `-/-/-/${pops[0]}`;
         tomorrowPops = `${pops[1]}/${pops[2]}/${pops[3]}/${pops[4]}`;
       }
-      //console.log(todayPops);
-      //console.log(tomorrowPops);
+      console.log("今日の降水確率:" + todayPops);
+      console.log("明日の降水確率:" + tomorrowPops);
 
       //最高気温、最低気温
       let todayTempMax, tomorrowTempMax;
@@ -254,13 +254,45 @@ function getDetailWeatherData(cityNumber) {
         tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[0];
       }
 
-      console.log(todayTempMax);
-      console.log(todayTempMin);
-      console.log(tomorrowTempMax);
-      console.log(tomorrowTempMin);
+      console.log("今日の最高気温:" + todayTempMax);
+      console.log("今日の最低気温:" + todayTempMin);
+      console.log("明日の最高気温:" + tomorrowTempMax);
+      console.log("明日の最低気温:" + tomorrowTempMin);
 
+      //今日、明日データの設置
+      const imageurl = 'https://www.jma.go.jp/bosai/forecast/img/';
+      document.querySelectorAll(".recent .weather-image").forEach((image, index) => {
+        const src = index === 0 ? imageurl + weatherCodes[todayWeatherCode][0] : imageurl + weatherCodes[tomorrowWeatherCode][0];
+        const alt = index === 0 ? weatherCodes[todayWeatherCode][1] : weatherCodes[tomorrowWeatherCode][1];
 
+        image.src = src;
+        image.alt = alt;
+      });
 
+      document.querySelectorAll(".recent .weather-text").forEach((text, index) => {
+        const weatherText = index === 0 ? weatherCodes[todayWeatherCode][1] : weatherCodes[tomorrowWeatherCode][1];
+        text.textContent = weatherText;
+      });
+
+      document.querySelectorAll(".recent .pops-item").forEach((item, index) => {
+        const pop = index === 0 ? todayPops : tomorrowPops;
+        item.textContent = pop;
+      });
+
+      document.querySelectorAll(".recent .wave-item").forEach((item, index) => {
+        const wave = index === 0 ? todayWave : tomorrowWave;
+        item.textContent = wave;
+      });
+
+      document.querySelectorAll(".recent .temps-max-item").forEach((item, index) => {
+        const tempMax = index === 0 ? todayTempMax : tomorrowTempMax;
+        item.textContent = tempMax;
+      });
+
+      document.querySelectorAll(".recent .temps-min-item").forEach((item, index) => {
+        const tempMin = index === 0 ? todayTempMin : tomorrowTempMin;
+        item.textContent = tempMin;
+      });
 
       //週間予報予報データ
       const weeklyWeatherArea = data[1].timeSeries[0].areas[0].area.name;
@@ -288,40 +320,39 @@ function getDetailWeatherData(cityNumber) {
       // console.log(weeklyWeatherTempsMax);
       // console.log(weeklyWeatherTempsMin);
 
-      document.querySelectorAll(".date-item").forEach((item, index) => {
+      document.querySelectorAll(".weekly-weather .date-item").forEach((item, index) => {
         item.textContent = weeklyTimeDefines[index];
       });
 
-      const imageurl = 'https://www.jma.go.jp/bosai/forecast/img/';
-      document.querySelectorAll(".weather-image").forEach((image, index) => {
+      document.querySelectorAll(".weekly-weather .weather-image").forEach((image, index) => {
         image.src = imageurl + weatherCodes[weeklyWeatherCodes[index]][0];
         image.alt = weatherCodes[weeklyWeatherCodes[index]][1];
       });
 
-      document.querySelectorAll(".weather-text").forEach((text, index) => {
+      document.querySelectorAll(".weekly-weather .weather-text").forEach((text, index) => {
         text.textContent = weatherCodes[weeklyWeatherCodes[index]][1];
       });
 
-      document.querySelectorAll(".reliability-item").forEach((item, index) => {
+      document.querySelectorAll(".weekly-weather .reliability-item").forEach((item, index) => {
         const reliability = weeklyWeatherReliabilities[index];
         item.textContent = reliability === "" ? "-" : reliability;
       });
 
-      document.querySelectorAll(".pops-item").forEach((item, index) => {
+      document.querySelectorAll(".weekly-weather .pops-item").forEach((item, index) => {
         const pop = weeklyWeatherPops[index];
         item.textContent = pop === "" ? "-" : pop;
       });
 
-      document.querySelectorAll(".prefectural-capital").forEach(name => {
+      document.querySelectorAll(".weekly-weather .prefectural-capital").forEach(name => {
         name.textContent = weeklyWeatherTempsArea;
       });
 
-      document.querySelectorAll(".temps-max-item").forEach((item, index) => {
+      document.querySelectorAll(".weekly-weather .temps-max-item").forEach((item, index) => {
         const tempMax = weeklyWeatherTempsMax[index];
         item.textContent = tempMax === "" ? "-" : tempMax;
       });
 
-      document.querySelectorAll(".temps-min-item").forEach((item, index) => {
+      document.querySelectorAll(".weekly-weather .temps-min-item").forEach((item, index) => {
         const tempMin = weeklyWeatherTempsMin[index];
         item.textContent = tempMin === "" ? "-" : tempMin;
       });
