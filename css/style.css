@@ -168,6 +168,87 @@ img {
   border-bottom: 1px solid var(--font-color);
 }
 
+.recent {
+  width: 70%;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: [heading-item] 1fr repeat(2, 1fr);
+  grid-template-rows: [date-item] 1fr [weather-item] 3fr [wave-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
+}
+.recent .heading,
+.recent .weather,
+.recent .pops,
+.recent .wave,
+.recent .temps-max,
+.recent .temps-min {
+  display: contents;
+}
+.recent .heading-item {
+  grid-column: heading-item;
+  border-top: 1px solid var(--font-color);
+  border-left: 1px solid var(--font-color);
+}
+.recent .heading-item:last-of-type {
+  border-bottom: 1px solid var(--font-color);
+}
+.recent .date-item,
+.recent .weather-item,
+.recent .wave-item,
+.recent .pops-item,
+.recent .temps-max-item,
+.recent .temps-min-item {
+  display: grid;
+  place-content: center;
+  border-top: 1px solid var(--font-color);
+  border-left: 1px solid var(--font-color);
+}
+.recent .date-item:last-of-type,
+.recent .weather-item:last-of-type,
+.recent .wave-item:last-of-type,
+.recent .pops-item:last-of-type,
+.recent .temps-max-item:last-of-type,
+.recent .temps-min-item:last-of-type {
+  border-right: 1px solid var(--font-color);
+}
+.recent .date-item:nth-of-type(1),
+.recent .weather-item:nth-of-type(1),
+.recent .wave-item:nth-of-type(1),
+.recent .pops-item:nth-of-type(1),
+.recent .temps-max-item:nth-of-type(1),
+.recent .temps-min-item:nth-of-type(1) {
+  grid-column: 2/3;
+}
+.recent .date-item:nth-of-type(2),
+.recent .weather-item:nth-of-type(2),
+.recent .wave-item:nth-of-type(2),
+.recent .pops-item:nth-of-type(2),
+.recent .temps-max-item:nth-of-type(2),
+.recent .temps-min-item:nth-of-type(2) {
+  grid-column: 3/4;
+}
+.recent .date-item {
+  grid-row: date-item;
+}
+.recent .weather-item {
+  grid-row: weather-item;
+}
+.recent .weather-item .weather-text {
+  text-align: center;
+}
+.recent .wave-item {
+  grid-row: wave-item;
+}
+.recent .pops-item {
+  grid-row: pops-item;
+}
+.recent .temps-max-item {
+  grid-row: temps-max-item;
+}
+.recent .temps-min-item {
+  grid-row: temps-min-item;
+  border-bottom: 1px solid var(--font-color);
+}
+
 .weekly-weather {
   width: 70%;
   margin-inline: auto;

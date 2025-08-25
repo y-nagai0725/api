@@ -29,6 +29,82 @@
   }
 }
 
+.recent {
+  width: 70%;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: [heading-item] 1fr repeat(2, 1fr);
+  grid-template-rows: [date-item] 1fr [weather-item] 3fr [wave-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
+
+  .heading,
+  .weather,
+  .pops,
+  .wave,
+  .temps-max,
+  .temps-min {
+    display: contents;
+  }
+
+  .heading-item {
+    grid-column: heading-item;
+    border-top: 1px solid var(--font-color);
+    border-left: 1px solid var(--font-color);
+
+    &:last-of-type {
+      border-bottom: 1px solid var(--font-color);
+    }
+  }
+
+  .date-item,
+  .weather-item,
+  .wave-item,
+  .pops-item,
+  .temps-max-item,
+  .temps-min-item {
+    display: grid;
+    place-content: center;
+    border-top: 1px solid var(--font-color);
+    border-left: 1px solid var(--font-color);
+
+    &:last-of-type {
+      border-right: 1px solid var(--font-color);
+    }
+
+    @for $i from 1 through 2 {
+      &:nth-of-type(#{$i}) {
+        grid-column: #{($i + 1)} / #{($i + 2)};
+      }
+    }
+  }
+
+  .date-item {
+    grid-row: date-item;
+  }
+  .weather-item {
+    grid-row: weather-item;
+
+    .weather-image {
+    }
+
+    .weather-text {
+      text-align: center;
+    }
+  }
+  .wave-item {
+    grid-row: wave-item;
+  }
+  .pops-item {
+    grid-row: pops-item;
+  }
+  .temps-max-item {
+    grid-row: temps-max-item;
+  }
+  .temps-min-item {
+    grid-row: temps-min-item;
+    border-bottom: 1px solid var(--font-color);
+  }
+}
+
 .weekly-weather {
   width: 70%;
   margin-inline: auto;
