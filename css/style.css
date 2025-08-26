@@ -176,6 +176,7 @@ img {
   grid-template-rows: [date-item] 1fr [weather-item] 3fr [wave-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
 }
 .recent .heading,
+.recent .date,
 .recent .weather,
 .recent .pops,
 .recent .wave,

@@ -209,6 +209,20 @@ function getDetailWeatherData(cityNumber) {
       }
 
       //今日、明日のデータ
+      //今日
+      const dayArray = ["日", "月", "火", "水", "木", "金", "土"];
+      const today = new Date();
+      const todayMonth = today.getMonth() + 1;
+      const todayDate = today.getDate();
+      const todayDay = today.getDay();
+      const todayFormattedString = `${todayMonth}/${todayDate}(${dayArray[todayDay]})`;
+      //明日
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const tomorrowMonth = tomorrow.getMonth() + 1;
+      const tomorrowDate = tomorrow.getDate();
+      const tomorrowDay = tomorrow.getDay();
+      const tomorrowFormattedString = `${tomorrowMonth}/${tomorrowDate}(${dayArray[tomorrowDay]})`;
       //天気
       const todayWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[0];
       const tomorrowWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[1];
@@ -260,6 +274,11 @@ function getDetailWeatherData(cityNumber) {
       console.log("明日の最低気温:" + tomorrowTempMin);
 
       //今日、明日データの設置
+      document.querySelectorAll(".recent .date-item").forEach((item, index) => {
+        const date = index === 0 ? todayFormattedString : tomorrowFormattedString;
+        item.textContent = date;
+      });
+
       const imageurl = 'https://www.jma.go.jp/bosai/forecast/img/';
       document.querySelectorAll(".recent .weather-image").forEach((image, index) => {
         const src = index === 0 ? imageurl + weatherCodes[todayWeatherCode][0] : imageurl + weatherCodes[tomorrowWeatherCode][0];
