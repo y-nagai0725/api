@@ -2,6 +2,7 @@ const selectedCity = localStorage.getItem("selectedCity");
 const mode = localStorage.getItem("mode");
 const darkModeButton = document.querySelector(".dark-mode-button");
 const selectBox = document.querySelector(".select");
+const dayArray = ["日", "月", "火", "水", "木", "金", "土"];
 const weatherCodes = {
   100: ['100.svg', '晴'],
   101: ['101.svg', '晴時々曇'],
@@ -186,6 +187,16 @@ function getOverviewWeatherData(cityNumber) {
     });
 }
 
+function convertDateFormattedString(timeDefine) {
+  const dateObject = new Date(timeDefine);
+  const month = dateObject.getMonth() + 1;
+  const date = dateObject.getDate();
+  const day = dayArray[dateObject.getDay()];
+  const formattedString = `${month}/${date}(${day})`;
+
+  return formattedString;
+}
+
 
 function getDetailWeatherData(cityNumber) {
   fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${cityNumber}.json`)
@@ -210,19 +221,18 @@ function getDetailWeatherData(cityNumber) {
 
       //今日、明日のデータ
       //今日
-      const dayArray = ["日", "月", "火", "水", "木", "金", "土"];
       const today = new Date();
       const todayMonth = today.getMonth() + 1;
       const todayDate = today.getDate();
-      const todayDay = today.getDay();
-      const todayFormattedString = `${todayMonth}/${todayDate}(${dayArray[todayDay]})`;
+      const todayDay = dayArray[today.getDay()];
+      const todayFormattedString = `今日：${todayMonth}/${todayDate}(${todayDay})`;
       //明日
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
       const tomorrowMonth = tomorrow.getMonth() + 1;
       const tomorrowDate = tomorrow.getDate();
-      const tomorrowDay = tomorrow.getDay();
-      const tomorrowFormattedString = `${tomorrowMonth}/${tomorrowDate}(${dayArray[tomorrowDay]})`;
+      const tomorrowDay = dayArray[tomorrow.getDay()];
+      const tomorrowFormattedString = `明日：${tomorrowMonth}/${tomorrowDate}(${tomorrowDay})`;
       //天気
       const todayWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[0];
       const tomorrowWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[1];
@@ -252,6 +262,7 @@ function getDetailWeatherData(cityNumber) {
       console.log("明日の降水確率:" + tomorrowPops);
 
       //最高気温、最低気温
+      const tempsArea = data[0].timeSeries[2].areas[0].area.name;
       let todayTempMax, tomorrowTempMax;
       let todayTempMin, tomorrowTempMin;
       if (reportDatetimeType === 1) {
@@ -274,6 +285,10 @@ function getDetailWeatherData(cityNumber) {
       console.log("明日の最低気温:" + tomorrowTempMin);
 
       //今日、明日データの設置
+      document.querySelectorAll(".recent .prefectural-capital").forEach(name => {
+        name.textContent = tempsArea;
+      });
+
       document.querySelectorAll(".recent .date-item").forEach((item, index) => {
         const date = index === 0 ? todayFormattedString : tomorrowFormattedString;
         item.textContent = date;
@@ -340,7 +355,7 @@ function getDetailWeatherData(cityNumber) {
       // console.log(weeklyWeatherTempsMin);
 
       document.querySelectorAll(".weekly-weather .date-item").forEach((item, index) => {
-        item.textContent = weeklyTimeDefines[index];
+        item.textContent = convertDateFormattedString(weeklyTimeDefines[index]);
       });
 
       document.querySelectorAll(".weekly-weather .weather-image").forEach((image, index) => {
