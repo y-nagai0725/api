@@ -292,6 +292,11 @@ function getDetailWeatherData(cityNumber) {
       document.querySelectorAll(".recent .date-item").forEach((item, index) => {
         const date = index === 0 ? todayFormattedString : tomorrowFormattedString;
         item.textContent = date;
+        if(date.includes("(土)")){
+          item.classList.add("saturday");
+        }else if(date.includes("(日)")){
+          item.classList.add("sunday");
+        }
       });
 
       const imageurl = 'https://www.jma.go.jp/bosai/forecast/img/';
@@ -355,7 +360,14 @@ function getDetailWeatherData(cityNumber) {
       // console.log(weeklyWeatherTempsMin);
 
       document.querySelectorAll(".weekly-weather .date-item").forEach((item, index) => {
-        item.textContent = convertDateFormattedString(weeklyTimeDefines[index]);
+        const date = convertDateFormattedString(weeklyTimeDefines[index]);
+        item.textContent = date;
+
+        if(date.includes("(土)")){
+          item.classList.add("saturday");
+        }else if(date.includes("(日)")){
+          item.classList.add("sunday");
+        }
       });
 
       document.querySelectorAll(".weekly-weather .weather-image").forEach((image, index) => {

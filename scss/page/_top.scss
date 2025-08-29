@@ -32,6 +32,7 @@
 .recent {
   width: 70%;
   margin-inline: auto;
+  margin-bottom: 80px;
   display: grid;
   grid-template-columns: [heading-item] 1fr repeat(2, 1fr);
   grid-template-rows: [date-item] 1fr [weather-item] 3fr [wave-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
@@ -80,6 +81,14 @@
 
   .date-item {
     grid-row: date-item;
+
+    &.saturday {
+      color: $blue;
+    }
+
+    &.sunday {
+      color: $red;
+    }
   }
   .weather-item {
     grid-row: weather-item;
@@ -99,9 +108,11 @@
   }
   .temps-max-item {
     grid-row: temps-max-item;
+    color: $red;
   }
   .temps-min-item {
     grid-row: temps-min-item;
+    color: $blue;
     border-bottom: 1px solid var(--font-color);
   }
 }
@@ -157,6 +168,14 @@
 
   .date-item {
     grid-row: date-item;
+
+    &.saturday {
+      color: $blue;
+    }
+
+    &.sunday {
+      color: $red;
+    }
   }
   .weather-item {
     grid-row: weather-item;
@@ -176,9 +195,11 @@
   }
   .temps-max-item {
     grid-row: temps-max-item;
+    color: $red;
   }
   .temps-min-item {
     grid-row: temps-min-item;
+    color: $blue;
     border-bottom: 1px solid var(--font-color);
   }
 }

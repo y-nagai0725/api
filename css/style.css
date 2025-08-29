@@ -171,6 +171,7 @@ img {
 .recent {
   width: 70%;
   margin-inline: auto;
+  margin-bottom: 80px;
   display: grid;
   grid-template-columns: [heading-item] 1fr repeat(2, 1fr);
   grid-template-rows: [date-item] 1fr [weather-item] 3fr [wave-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
@@ -230,6 +231,12 @@ img {
 .recent .date-item {
   grid-row: date-item;
 }
+.recent .date-item.saturday {
+  color: #00f;
+}
+.recent .date-item.sunday {
+  color: #f00;
+}
 .recent .weather-item {
   grid-row: weather-item;
 }
@@ -244,9 +251,11 @@ img {
 }
 .recent .temps-max-item {
   grid-row: temps-max-item;
+  color: #f00;
 }
 .recent .temps-min-item {
   grid-row: temps-min-item;
+  color: #00f;
   border-bottom: 1px solid var(--font-color);
 }
 
@@ -352,6 +361,12 @@ img {
 .weekly-weather .date-item {
   grid-row: date-item;
 }
+.weekly-weather .date-item.saturday {
+  color: #00f;
+}
+.weekly-weather .date-item.sunday {
+  color: #f00;
+}
 .weekly-weather .weather-item {
   grid-row: weather-item;
 }
@@ -366,9 +381,11 @@ img {
 }
 .weekly-weather .temps-max-item {
   grid-row: temps-max-item;
+  color: #f00;
 }
 .weekly-weather .temps-min-item {
   grid-row: temps-min-item;
+  color: #00f;
   border-bottom: 1px solid var(--font-color);
 }
 
