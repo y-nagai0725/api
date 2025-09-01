@@ -179,7 +179,7 @@ function getOverviewWeatherData(cityNumber) {
       const overviewText = data.text;
 
       document.querySelector(".publisher").textContent = publisher;
-      document.querySelector(".reportDateTime").textContent = reportDateTime;
+      document.querySelector(".reportDateTime").textContent = convertDateFormattedString(reportDateTime, true);
       document.querySelector(".overviewText").textContent = overviewText;
     })
     .catch(error => {
@@ -187,12 +187,14 @@ function getOverviewWeatherData(cityNumber) {
     });
 }
 
-function convertDateFormattedString(timeDefine) {
+function convertDateFormattedString(timeDefine, needsTimeString = false) {
   const dateObject = new Date(timeDefine);
   const month = dateObject.getMonth() + 1;
   const date = dateObject.getDate();
   const day = dayArray[dateObject.getDay()];
-  const formattedString = `${month}/${date}(${day})`;
+  const hour = dateObject.getHours();
+  const minute = dateObject.getMinutes();
+  const formattedString = `${month}/${date}(${day})` + (needsTimeString ? ` ${hour}:${minute}` : "");
 
   return formattedString;
 }
@@ -222,24 +224,25 @@ function getDetailWeatherData(cityNumber) {
       //今日、明日のデータ
       //今日
       const today = new Date();
-      const todayMonth = today.getMonth() + 1;
-      const todayDate = today.getDate();
-      const todayDay = dayArray[today.getDay()];
-      const todayFormattedString = `今日：${todayMonth}/${todayDate}(${todayDay})`;
+      const todayFormattedString = "今日：" + convertDateFormattedString(today);
+
       //明日
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
-      const tomorrowMonth = tomorrow.getMonth() + 1;
-      const tomorrowDate = tomorrow.getDate();
-      const tomorrowDay = dayArray[tomorrow.getDay()];
-      const tomorrowFormattedString = `明日：${tomorrowMonth}/${tomorrowDate}(${tomorrowDay})`;
+      const tomorrowFormattedString = "明日：" + convertDateFormattedString(tomorrow);
       //天気
       const todayWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[0];
       const tomorrowWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[1];
 
       //風速
-      const todayWave = data[0].timeSeries[0].areas[0].waves[0];
-      const tomorrowWave = data[0].timeSeries[0].areas[0].waves[1];
+      let todayWave, tomorrowWave;
+      if (!data[0].timeSeries[0].areas[0].waves) {
+        todayWave = "-";
+        tomorrowWave = "-";
+      } else {
+        todayWave = data[0].timeSeries[0].areas[0].waves[0];
+        tomorrowWave = data[0].timeSeries[0].areas[0].waves[1];
+      }
 
       //降水確率
       const popsTimeDefines = data[0].timeSeries[1].timeDefines;
@@ -292,9 +295,9 @@ function getDetailWeatherData(cityNumber) {
       document.querySelectorAll(".recent .date-item").forEach((item, index) => {
         const date = index === 0 ? todayFormattedString : tomorrowFormattedString;
         item.textContent = date;
-        if(date.includes("(土)")){
+        if (date.includes("(土)")) {
           item.classList.add("saturday");
-        }else if(date.includes("(日)")){
+        } else if (date.includes("(日)")) {
           item.classList.add("sunday");
         }
       });
@@ -363,9 +366,9 @@ function getDetailWeatherData(cityNumber) {
         const date = convertDateFormattedString(weeklyTimeDefines[index]);
         item.textContent = date;
 
-        if(date.includes("(土)")){
+        if (date.includes("(土)")) {
           item.classList.add("saturday");
-        }else if(date.includes("(日)")){
+        } else if (date.includes("(日)")) {
           item.classList.add("sunday");
         }
       });
