@@ -11,6 +11,7 @@
     padding: 10px;
     border-left: 1px solid var(--font-color);
     border-top: 1px solid var(--font-color);
+    font-weight: 700;
 
     &:last-of-type {
       border-bottom: 1px solid var(--font-color);
@@ -49,8 +50,10 @@
 
   .heading-item {
     grid-column: heading-item;
+    padding: 10px;
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
+    font-weight: 700;
 
     &:last-of-type {
       border-bottom: 1px solid var(--font-color);
@@ -136,8 +139,10 @@
 
   .heading-item {
     grid-column: heading-item;
+    padding: 10px;
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
+    font-weight: 700;
 
     &:last-of-type {
       border-bottom: 1px solid var(--font-color);

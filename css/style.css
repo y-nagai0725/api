@@ -154,6 +154,7 @@ img {
   padding: 10px;
   border-left: 1px solid var(--font-color);
   border-top: 1px solid var(--font-color);
+  font-weight: 700;
 }
 .overviewTable dt:last-of-type {
   border-bottom: 1px solid var(--font-color);
@@ -187,8 +188,10 @@ img {
 }
 .recent .heading-item {
   grid-column: heading-item;
+  padding: 10px;
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
+  font-weight: 700;
 }
 .recent .heading-item:last-of-type {
   border-bottom: 1px solid var(--font-color);
@@ -277,8 +280,10 @@ img {
 }
 .weekly-weather .heading-item {
   grid-column: heading-item;
+  padding: 10px;
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
+  font-weight: 700;
 }
 .weekly-weather .heading-item:last-of-type {
   border-bottom: 1px solid var(--font-color);
