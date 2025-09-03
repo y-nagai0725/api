@@ -363,6 +363,9 @@ function getDetailWeatherData(cityNumber) {
       // console.log(weeklyWeatherTempsMin);
 
       document.querySelectorAll(".weekly-weather .date-item").forEach((item, index) => {
+        //重複している日付データがひとつあるので1進める
+        index++;
+
         const date = convertDateFormattedString(weeklyTimeDefines[index]);
         item.textContent = date;
 
@@ -374,20 +377,32 @@ function getDetailWeatherData(cityNumber) {
       });
 
       document.querySelectorAll(".weekly-weather .weather-image").forEach((image, index) => {
+        //重複している日付データがひとつあるので1進める
+        index++;
+
         image.src = imageurl + weatherCodes[weeklyWeatherCodes[index]][0];
         image.alt = weatherCodes[weeklyWeatherCodes[index]][1];
       });
 
       document.querySelectorAll(".weekly-weather .weather-text").forEach((text, index) => {
+        //重複している日付データがひとつあるので1進める
+        index++;
+
         text.textContent = weatherCodes[weeklyWeatherCodes[index]][1];
       });
 
       document.querySelectorAll(".weekly-weather .reliability-item").forEach((item, index) => {
+        //重複している日付データがひとつあるので1進める
+        index++;
+
         const reliability = weeklyWeatherReliabilities[index];
         item.textContent = reliability === "" ? "-" : reliability;
       });
 
       document.querySelectorAll(".weekly-weather .pops-item").forEach((item, index) => {
+        //重複している日付データがひとつあるので1進める
+        index++;
+
         const pop = weeklyWeatherPops[index];
         item.textContent = pop === "" ? "-" : pop;
       });
@@ -397,11 +412,17 @@ function getDetailWeatherData(cityNumber) {
       });
 
       document.querySelectorAll(".weekly-weather .temps-max-item").forEach((item, index) => {
+        //重複している日付データがひとつあるので1進める
+        index++;
+
         const tempMax = weeklyWeatherTempsMax[index];
         item.textContent = tempMax === "" ? "-" : tempMax;
       });
 
       document.querySelectorAll(".weekly-weather .temps-min-item").forEach((item, index) => {
+        //重複している日付データがひとつあるので1進める
+        index++;
+
         const tempMin = weeklyWeatherTempsMin[index];
         item.textContent = tempMin === "" ? "-" : tempMin;
       });

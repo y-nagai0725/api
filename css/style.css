@@ -266,7 +266,7 @@ img {
   width: 70%;
   margin-inline: auto;
   display: grid;
-  grid-template-columns: [heading-item] 1fr repeat(7, 1fr);
+  grid-template-columns: [heading-item] 1fr repeat(6, 1fr);
   grid-template-rows: [date-item] 1fr [weather-item] 3fr [reliability-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
 }
 .weekly-weather .heading,
@@ -354,14 +354,6 @@ img {
 .weekly-weather .temps-max-item:nth-of-type(6),
 .weekly-weather .temps-min-item:nth-of-type(6) {
   grid-column: 7/8;
-}
-.weekly-weather .date-item:nth-of-type(7),
-.weekly-weather .weather-item:nth-of-type(7),
-.weekly-weather .reliability-item:nth-of-type(7),
-.weekly-weather .pops-item:nth-of-type(7),
-.weekly-weather .temps-max-item:nth-of-type(7),
-.weekly-weather .temps-min-item:nth-of-type(7) {
-  grid-column: 8/9;
 }
 .weekly-weather .date-item {
   grid-row: date-item;
