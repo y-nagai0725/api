@@ -138,7 +138,6 @@ if (selectedCity) {
 }
 
 if (mode) {
-  console.log("既にmode選択しているよ");
   if (mode === "dark") {
     document.querySelector("html").classList.add("dark-mode");
     darkModeButton.checked = true;
@@ -146,7 +145,6 @@ if (mode) {
 }
 
 darkModeButton.addEventListener("change", () => {
-  console.log("mode:change!!");
   if (darkModeButton.checked) {
     document.querySelector("html").classList.add("dark-mode");
     localStorage.setItem("mode", "dark");
@@ -157,7 +155,6 @@ darkModeButton.addEventListener("change", () => {
 });
 
 selectBox.addEventListener("change", () => {
-  console.log("select:change!!");
   const city = selectBox.value;
   if (city === "") {
     localStorage.removeItem("selectedCity");
@@ -172,10 +169,8 @@ function getOverviewWeatherData(cityNumber) {
   fetch(`https://www.jma.go.jp/bosai/forecast/data/overview_forecast/${cityNumber}.json`)
     .then(response => response.json())
     .then(data => {
-      //console.log(data);
       const publisher = data.publishingOffice;
       const reportDateTime = data.reportDatetime;
-      //const area = data.targetArea;
       const overviewText = data.text;
 
       document.querySelector(".publisher").textContent = publisher;
@@ -204,13 +199,12 @@ function getDetailWeatherData(cityNumber) {
   fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${cityNumber}.json`)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-
-      //観測気象台、発表時刻
+      //観測気象台
       const publishingOffice = data[1].publishingOffice;
-      const reportDatetime = data[1].reportDatetime;
 
-      console.log("発表時刻:" + reportDatetime);
+      //今日、明日のデータ
+      //発表時刻
+      const reportDatetime = data[0].reportDatetime;
 
       let reportDatetimeType;
       if (reportDatetime.includes("T05")) {
@@ -221,7 +215,6 @@ function getDetailWeatherData(cityNumber) {
         reportDatetimeType = 3;
       }
 
-      //今日、明日のデータ
       //今日
       const today = new Date();
       const todayFormattedString = "今日：" + convertDateFormattedString(today);
@@ -249,27 +242,28 @@ function getDetailWeatherData(cityNumber) {
       const pops = data[0].timeSeries[1].areas[0].pops;
       let todayPops, tomorrowPops;
       if (popsTimeDefines[0].includes("T00")) {
-        todayPops = `${pops[0]}/${pops[1]}/${pops[2]}/${pops[3]}`;
-        tomorrowPops = `${pops[4]}/-/-/-`;
+        todayPops = `${pops[0]} / ${pops[1]} / ${pops[2]} / ${pops[3]}`;
+        tomorrowPops = `${pops[4]} / - / - / -`;
       } else if (popsTimeDefines[0].includes("T06")) {
-        todayPops = `-/${pops[0]}/${pops[1]}/${pops[2]}`;
-        tomorrowPops = `${pops[3]}/${pops[4]}/-/-`;
+        todayPops = `- / ${pops[0]} / ${pops[1]} / ${pops[2]}`;
+        tomorrowPops = `${pops[3]} / ${pops[4]} / - / -`;
       } else if (popsTimeDefines[0].includes("T12")) {
-        todayPops = `-/-/${pops[0]}/${pops[1]}`;
-        tomorrowPops = `${pops[2]}/${pops[3]}/${pops[4]}/${pops[5]}`;
+        todayPops = `- / - / ${pops[0]} / ${pops[1]}`;
+        tomorrowPops = `${pops[2]} / ${pops[3]} / ${pops[4]} / ${pops[5]}`;
       } else {
-        todayPops = `-/-/-/${pops[0]}`;
-        tomorrowPops = `${pops[1]}/${pops[2]}/${pops[3]}/${pops[4]}`;
+        todayPops = `- / - / - / ${pops[0]}`;
+        tomorrowPops = `${pops[1]} / ${pops[2]} / ${pops[3]} / ${pops[4]}`;
       }
-      console.log("今日の降水確率:" + todayPops);
-      console.log("明日の降水確率:" + tomorrowPops);
 
       //最高気温、最低気温
       const tempsArea = data[0].timeSeries[2].areas[0].area.name;
       let todayTempMax, tomorrowTempMax;
       let todayTempMin, tomorrowTempMin;
       if (reportDatetimeType === 1) {
-
+        todayTempMax = "-";
+        todayTempMin = "-";
+        tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[3];
+        tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[2];
       } else if (reportDatetimeType === 2) {
         todayTempMax = data[0].timeSeries[2].areas[0].temps[0];
         todayTempMin = "-";
@@ -281,11 +275,6 @@ function getDetailWeatherData(cityNumber) {
         tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[1];
         tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[0];
       }
-
-      console.log("今日の最高気温:" + todayTempMax);
-      console.log("今日の最低気温:" + todayTempMin);
-      console.log("明日の最高気温:" + tomorrowTempMax);
-      console.log("明日の最低気温:" + tomorrowTempMin);
 
       //今日、明日データの設置
       document.querySelectorAll(".recent .prefectural-capital").forEach(name => {
@@ -337,6 +326,7 @@ function getDetailWeatherData(cityNumber) {
       });
 
       //週間予報予報データ
+      const weeklyReportDatetime = data[1].reportDatetime;
       const weeklyWeatherArea = data[1].timeSeries[0].areas[0].area.name;
       const weeklyWeatherCodes = data[1].timeSeries[0].areas[0].weatherCodes;
       const weeklyWeatherPops = data[1].timeSeries[0].areas[0].pops;
@@ -347,20 +337,6 @@ function getDetailWeatherData(cityNumber) {
       const weeklyWeatherTempsArea = data[1].timeSeries[1].areas[0].area.name;
       const weeklyWeatherTempsMax = data[1].timeSeries[1].areas[0].tempsMax;
       const weeklyWeatherTempsMin = data[1].timeSeries[1].areas[0].tempsMin;
-
-
-      // console.log(publishingOffice);
-      // console.log(reportDatetime);
-
-      // console.log(weeklyWeatherArea);
-      // console.log(weeklyWeatherCodes);
-      // console.log(weeklyWeatherPops);
-      // console.log(weeklyWeatherReliabilities);
-      // console.log(weeklyTimeDefines);
-
-      // console.log(weeklyWeatherTempsArea);
-      // console.log(weeklyWeatherTempsMax);
-      // console.log(weeklyWeatherTempsMin);
 
       document.querySelectorAll(".weekly-weather .date-item").forEach((item, index) => {
         //重複している日付データがひとつあるので1進める

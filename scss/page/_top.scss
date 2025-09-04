@@ -35,7 +35,7 @@
   margin-inline: auto;
   margin-bottom: 80px;
   display: grid;
-  grid-template-columns: [heading-item] 1fr repeat(2, 1fr);
+  grid-template-columns: [heading-item] max-content repeat(2, 1fr);
   grid-template-rows: [date-item] 1fr [weather-item] 3fr [wave-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
 
   .heading,
@@ -124,7 +124,7 @@
   width: 70%;
   margin-inline: auto;
   display: grid;
-  grid-template-columns: [heading-item] 1fr repeat(6, 1fr);
+  grid-template-columns: [heading-item] max-content repeat(6, 1fr);
   grid-template-rows: [date-item] 1fr [weather-item] 3fr [reliability-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
 
   .heading,
