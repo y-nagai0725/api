@@ -199,17 +199,19 @@ function getDetailWeatherData(cityNumber) {
   fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${cityNumber}.json`)
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       //観測気象台
       const publishingOffice = data[1].publishingOffice;
 
       //今日、明日のデータ
       //発表時刻
       const reportDatetime = data[0].reportDatetime;
+      console.log(reportDatetime);
 
       let reportDatetimeType;
       if (reportDatetime.includes("T05")) {
         reportDatetimeType = 1;
-      } else if (reportDatetime.includes("T11")) {
+      } else if (reportDatetime.includes("T12")) {
         reportDatetimeType = 2;
       } else {
         reportDatetimeType = 3;
