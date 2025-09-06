@@ -211,9 +211,10 @@ function getDetailWeatherData(cityNumber) {
       let reportDatetimeType;
       if (reportDatetime.includes("T05")) {
         reportDatetimeType = 1;
-      } else if (reportDatetime.includes("T12")) {
+      } else if (reportDatetime.includes("T11") || reportDatetime.includes("T12")) {
         reportDatetimeType = 2;
       } else {
+        //T17,T21,T22
         reportDatetimeType = 3;
       }
 
@@ -248,7 +249,7 @@ function getDetailWeatherData(cityNumber) {
         tomorrowPops = `${pops[4]} / - / - / -`;
       } else if (popsTimeDefines[0].includes("T06")) {
         todayPops = `- / ${pops[0]} / ${pops[1]} / ${pops[2]}`;
-        tomorrowPops = `${pops[3]} / ${pops[4]} / - / -`;
+        tomorrowPops = `${pops[3]} / ${pops[4]} / ${pops[5]} / ${pops[6]}`;
       } else if (popsTimeDefines[0].includes("T12")) {
         todayPops = `- / - / ${pops[0]} / ${pops[1]}`;
         tomorrowPops = `${pops[2]} / ${pops[3]} / ${pops[4]} / ${pops[5]}`;
@@ -262,7 +263,7 @@ function getDetailWeatherData(cityNumber) {
       let todayTempMax, tomorrowTempMax;
       let todayTempMin, tomorrowTempMin;
       if (reportDatetimeType === 1) {
-        todayTempMax = "-";
+        todayTempMax = data[0].timeSeries[2].areas[0].temps[0];
         todayTempMin = "-";
         tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[3];
         tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[2];
