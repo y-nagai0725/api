@@ -6,6 +6,15 @@ html {
   background-color: var(--background-color);
   color: var(--font-color);
   font-family: $noto-sans;
+  font-size: calc(10vw * calc(100 / 375));
+
+  @include tab {
+    font-size: calc(10vw * calc(100 / 768));
+  }
+
+  @include pc {
+    font-size: calc(10vw * calc(100 / 1920));
+  }
 
   &.dark-mode {
     --background-color: #{$black};

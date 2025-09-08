@@ -130,6 +130,17 @@ html {
   background-color: var(--background-color);
   color: var(--font-color);
   font-family: "Noto Sans JP", sans-serif;
+  font-size: 2.6666666667vw;
+}
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 1.3020833333vw;
+  }
+}
+@media screen and (min-width: 1024px) {
+  html {
+    font-size: 0.5208333333vw;
+  }
 }
 html.dark-mode {
   --background-color: #000000;
@@ -140,6 +151,20 @@ img {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.container {
+  padding: 0 30px;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 0 40px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container {
+    padding: 0 80px;
+  }
 }
 
 .overviewTable {
@@ -203,6 +228,7 @@ img {
 .recent .pops-item,
 .recent .temps-max-item,
 .recent .temps-min-item {
+  padding: 10px;
   display: grid;
   place-content: center;
   border-top: 1px solid var(--font-color);
@@ -296,6 +322,7 @@ img {
 .weekly-weather .pops-item,
 .weekly-weather .temps-max-item,
 .weekly-weather .temps-min-item {
+  padding: 10px;
   display: grid;
   place-content: center;
   border-top: 1px solid var(--font-color);
