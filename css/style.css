@@ -167,6 +167,39 @@ img {
   }
 }
 
+.button-wrapper {
+  margin: 2.4rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.page-title {
+  margin-bottom: 4rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(20px, 2rem, 24px);
+}
+@media screen and (min-width: 768px) {
+  .page-title {
+    margin-bottom: 6rem;
+    font-size: clamp(24px, 2.4rem, 26px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .page-title {
+    margin-bottom: 8rem;
+    font-size: clamp(26px, 3rem, 30px);
+  }
+}
+
 .overviewTable {
   width: 70%;
   margin-inline: auto;
