@@ -1,7 +1,7 @@
 const selectedCity = localStorage.getItem("selectedCity");
 const mode = localStorage.getItem("mode");
-const darkModeButton = document.querySelector(".dark-mode-button");
-const selectBox = document.querySelector(".select");
+const darkModeButton = document.querySelector(".dark-mode__button");
+const prefecturesSelectBox = document.querySelector(".prefectures__select");
 const dayArray = ["日", "月", "火", "水", "木", "金", "土"];
 const weatherCodes = {
   100: ['100.svg', '晴'],
@@ -127,7 +127,7 @@ const weatherCodes = {
 if (selectedCity) {
   getOverviewWeatherData(selectedCity);
   getDetailWeatherData(selectedCity);
-  Array.from(document.querySelector(".select").options).forEach(option => {
+  Array.from(prefecturesSelectBox.options).forEach(option => {
     const value = option.value;
     if (selectedCity === value) {
       option.selected = true;
@@ -139,23 +139,23 @@ if (selectedCity) {
 
 if (mode) {
   if (mode === "dark") {
-    document.querySelector("html").classList.add("dark-mode");
+    document.querySelector("html").classList.add("dark");
     darkModeButton.checked = true;
   }
 }
 
 darkModeButton.addEventListener("change", () => {
   if (darkModeButton.checked) {
-    document.querySelector("html").classList.add("dark-mode");
+    document.querySelector("html").classList.add("dark");
     localStorage.setItem("mode", "dark");
   } else {
-    document.querySelector("html").classList.remove("dark-mode");
+    document.querySelector("html").classList.remove("dark");
     localStorage.setItem("mode", "light");
   }
 });
 
-selectBox.addEventListener("change", () => {
-  const city = selectBox.value;
+prefecturesSelectBox.addEventListener("change", () => {
+  const city = prefecturesSelectBox.value;
   if (city === "") {
     localStorage.removeItem("selectedCity");
   } else {
@@ -173,9 +173,9 @@ function getOverviewWeatherData(cityNumber) {
       const reportDateTime = data.reportDatetime;
       const overviewText = data.text;
 
-      document.querySelector(".publisher").textContent = publisher;
-      document.querySelector(".reportDateTime").textContent = convertDateFormattedString(reportDateTime, true);
-      document.querySelector(".overviewText").textContent = overviewText;
+      document.querySelector(".overview__publisher").textContent = publisher;
+      document.querySelector(".overview__report-date-time").textContent = convertDateFormattedString(reportDateTime, true);
+      document.querySelector(".overview__text").textContent = overviewText;
     })
     .catch(error => {
       console.error('データの取得に失敗しちゃった…', error);

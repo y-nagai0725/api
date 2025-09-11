@@ -16,7 +16,7 @@ html {
     font-size: calc(10vw * calc(100 / 1920));
   }
 
-  &.dark-mode {
+  &.dark {
     --background-color: #{$black};
     --font-color: #{$white};
   }
