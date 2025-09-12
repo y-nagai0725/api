@@ -278,11 +278,11 @@ function getDetailWeatherData(cityNumber) {
       }
 
       //今日、明日データの設置
-      document.querySelectorAll(".recent .prefectural-capital").forEach(name => {
+      document.querySelectorAll(".recent__prefectural-capital").forEach(name => {
         name.textContent = tempsArea;
       });
 
-      document.querySelectorAll(".recent .date-item").forEach((item, index) => {
+      document.querySelectorAll(".recent__date").forEach((item, index) => {
         const date = index === 0 ? todayFormattedString : tomorrowFormattedString;
         item.textContent = date;
         if (date.includes("(土)")) {
@@ -293,7 +293,7 @@ function getDetailWeatherData(cityNumber) {
       });
 
       const imageurl = 'https://www.jma.go.jp/bosai/forecast/img/';
-      document.querySelectorAll(".recent .weather-image").forEach((image, index) => {
+      document.querySelectorAll(".recent__weather-image").forEach((image, index) => {
         const src = index === 0 ? imageurl + weatherCodes[todayWeatherCode][0] : imageurl + weatherCodes[tomorrowWeatherCode][0];
         const alt = index === 0 ? weatherCodes[todayWeatherCode][1] : weatherCodes[tomorrowWeatherCode][1];
 
@@ -301,27 +301,27 @@ function getDetailWeatherData(cityNumber) {
         image.alt = alt;
       });
 
-      document.querySelectorAll(".recent .weather-text").forEach((text, index) => {
+      document.querySelectorAll(".recent__weather-text").forEach((text, index) => {
         const weatherText = index === 0 ? weatherCodes[todayWeatherCode][1] : weatherCodes[tomorrowWeatherCode][1];
         text.textContent = weatherText;
       });
 
-      document.querySelectorAll(".recent .pops-item").forEach((item, index) => {
+      document.querySelectorAll(".recent__pops").forEach((item, index) => {
         const pop = index === 0 ? todayPops : tomorrowPops;
         item.textContent = pop;
       });
 
-      document.querySelectorAll(".recent .wave-item").forEach((item, index) => {
+      document.querySelectorAll(".recent__wave").forEach((item, index) => {
         const wave = index === 0 ? todayWave : tomorrowWave;
         item.textContent = wave;
       });
 
-      document.querySelectorAll(".recent .temps-max-item").forEach((item, index) => {
+      document.querySelectorAll(".recent__temps-max").forEach((item, index) => {
         const tempMax = index === 0 ? todayTempMax : tomorrowTempMax;
         item.textContent = tempMax;
       });
 
-      document.querySelectorAll(".recent .temps-min-item").forEach((item, index) => {
+      document.querySelectorAll(".recent__temps-min").forEach((item, index) => {
         const tempMin = index === 0 ? todayTempMin : tomorrowTempMin;
         item.textContent = tempMin;
       });
