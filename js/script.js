@@ -339,7 +339,7 @@ function getDetailWeatherData(cityNumber) {
       const weeklyWeatherTempsMax = data[1].timeSeries[1].areas[0].tempsMax;
       const weeklyWeatherTempsMin = data[1].timeSeries[1].areas[0].tempsMin;
 
-      document.querySelectorAll(".weekly-weather .date-item").forEach((item, index) => {
+      document.querySelectorAll(".weekly__date").forEach((item, index) => {
         //重複している日付データがひとつあるので1進める
         index++;
 
@@ -353,7 +353,7 @@ function getDetailWeatherData(cityNumber) {
         }
       });
 
-      document.querySelectorAll(".weekly-weather .weather-image").forEach((image, index) => {
+      document.querySelectorAll(".weekly__weather-image").forEach((image, index) => {
         //重複している日付データがひとつあるので1進める
         index++;
 
@@ -361,14 +361,14 @@ function getDetailWeatherData(cityNumber) {
         image.alt = weatherCodes[weeklyWeatherCodes[index]][1];
       });
 
-      document.querySelectorAll(".weekly-weather .weather-text").forEach((text, index) => {
+      document.querySelectorAll(".weekly__weather-text").forEach((text, index) => {
         //重複している日付データがひとつあるので1進める
         index++;
 
         text.textContent = weatherCodes[weeklyWeatherCodes[index]][1];
       });
 
-      document.querySelectorAll(".weekly-weather .reliability-item").forEach((item, index) => {
+      document.querySelectorAll(".weekly__reliability").forEach((item, index) => {
         //重複している日付データがひとつあるので1進める
         index++;
 
@@ -376,7 +376,7 @@ function getDetailWeatherData(cityNumber) {
         item.textContent = reliability === "" ? "-" : reliability;
       });
 
-      document.querySelectorAll(".weekly-weather .pops-item").forEach((item, index) => {
+      document.querySelectorAll(".weekly__pops").forEach((item, index) => {
         //重複している日付データがひとつあるので1進める
         index++;
 
@@ -384,11 +384,11 @@ function getDetailWeatherData(cityNumber) {
         item.textContent = pop === "" ? "-" : pop;
       });
 
-      document.querySelectorAll(".weekly-weather .prefectural-capital").forEach(name => {
+      document.querySelectorAll(".weekly__prefectural-capital").forEach(name => {
         name.textContent = weeklyWeatherTempsArea;
       });
 
-      document.querySelectorAll(".weekly-weather .temps-max-item").forEach((item, index) => {
+      document.querySelectorAll(".weekly__temps-max").forEach((item, index) => {
         //重複している日付データがひとつあるので1進める
         index++;
 
@@ -396,7 +396,7 @@ function getDetailWeatherData(cityNumber) {
         item.textContent = tempMax === "" ? "-" : tempMax;
       });
 
-      document.querySelectorAll(".weekly-weather .temps-min-item").forEach((item, index) => {
+      document.querySelectorAll(".weekly__temps-min").forEach((item, index) => {
         //重複している日付データがひとつあるので1進める
         index++;
 

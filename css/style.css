@@ -154,21 +154,24 @@ img {
 }
 
 .container {
-  padding: 0 30px;
+  padding: 0 2rem;
 }
 @media screen and (min-width: 768px) {
   .container {
-    padding: 0 40px;
+    padding: 0 3rem;
   }
 }
 @media screen and (min-width: 1024px) {
   .container {
-    padding: 0 80px;
+    padding: 0;
+    margin-inline: auto;
+    width: 90%;
+    max-width: 1100px;
   }
 }
 
 .dark-mode {
-  margin: 2.4rem 0;
+  margin: 1.6rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -179,6 +182,11 @@ img {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
+}
+@media screen and (min-width: 768px) {
+  .dark-mode {
+    margin: 2.4rem 0;
+  }
 }
 .dark-mode__button {
   padding: unset;
@@ -237,37 +245,116 @@ img {
   }
 }
 
+.prefectures {
+  margin-bottom: 2.4rem;
+}
+@media screen and (min-width: 768px) {
+  .prefectures {
+    margin-bottom: 3.2rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .prefectures {
+    margin-bottom: 4rem;
+  }
+}
+.prefectures__title {
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  font-size: clamp(14px, 1.4rem, 16px);
+}
+@media screen and (min-width: 768px) {
+  .prefectures__title {
+    margin-bottom: 1.6rem;
+    font-size: clamp(16px, 1.6rem, 20px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .prefectures__title {
+    font-size: clamp(18px, 2rem, 20px);
+  }
+}
+.overview {
+  margin-bottom: 2.4rem;
+}
+@media screen and (min-width: 768px) {
+  .overview {
+    margin-bottom: 3.2rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .overview {
+    margin-bottom: 4rem;
+  }
+}
+.overview__title {
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  font-size: clamp(14px, 1.4rem, 16px);
+}
+@media screen and (min-width: 768px) {
+  .overview__title {
+    margin-bottom: 1.6rem;
+    font-size: clamp(16px, 1.6rem, 20px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .overview__title {
+    font-size: clamp(18px, 2rem, 20px);
+  }
+}
 .overview__table {
-  width: 70%;
-  margin-inline: auto;
-  margin-bottom: 80px;
   display: grid;
   grid-template-columns: -webkit-max-content 1fr;
   grid-template-columns: max-content 1fr;
 }
-.overview__table dt {
+.overview__heading {
   padding: 10px;
   border-left: 1px solid var(--font-color);
   border-top: 1px solid var(--font-color);
   font-weight: 700;
 }
-.overview__table dt:last-of-type {
+.overview__heading:last-of-type {
   border-bottom: 1px solid var(--font-color);
 }
-.overview__table dd {
+.overview__publisher, .overview__report-date-time, .overview__text {
   padding: 10px;
   border-left: 1px solid var(--font-color);
   border-right: 1px solid var(--font-color);
   border-top: 1px solid var(--font-color);
 }
-.overview__table dd:last-of-type {
+.overview__publisher:last-of-type, .overview__report-date-time:last-of-type, .overview__text:last-of-type {
   border-bottom: 1px solid var(--font-color);
 }
 
 .recent {
-  width: 70%;
-  margin-inline: auto;
-  margin-bottom: 80px;
+  margin-bottom: 2.4rem;
+}
+@media screen and (min-width: 768px) {
+  .recent {
+    margin-bottom: 3.2rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .recent {
+    margin-bottom: 4rem;
+  }
+}
+.recent__title {
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  font-size: clamp(14px, 1.4rem, 16px);
+}
+@media screen and (min-width: 768px) {
+  .recent__title {
+    margin-bottom: 1.6rem;
+    font-size: clamp(16px, 1.6rem, 20px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .recent__title {
+    font-size: clamp(18px, 2rem, 20px);
+  }
 }
 .recent__table {
   display: grid;
@@ -335,128 +422,115 @@ img {
   border-bottom: 1px solid var(--font-color);
 }
 
-.weekly-weather {
-  width: 70%;
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: [heading-item] -webkit-max-content repeat(6, 1fr);
-  grid-template-columns: [heading-item] max-content repeat(6, 1fr);
-  grid-template-rows: [date-item] 1fr [weather-item] 3fr [reliability-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
+.weekly {
+  margin-bottom: 2.4rem;
+  overflow: scroll;
 }
-.weekly-weather .heading,
-.weekly-weather .date,
-.weekly-weather .weather,
-.weekly-weather .reliability,
-.weekly-weather .pops,
-.weekly-weather .temps-max,
-.weekly-weather .temps-min {
+@media screen and (min-width: 768px) {
+  .weekly {
+    margin-bottom: 3.2rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .weekly {
+    margin-bottom: 4rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .weekly {
+    overflow: auto;
+  }
+}
+.weekly__title {
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  font-size: clamp(14px, 1.4rem, 16px);
+}
+@media screen and (min-width: 768px) {
+  .weekly__title {
+    margin-bottom: 1.6rem;
+    font-size: clamp(16px, 1.6rem, 20px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .weekly__title {
+    font-size: clamp(18px, 2rem, 20px);
+  }
+}
+.weekly__table {
+  display: grid;
+  grid-template-columns: [heading] -webkit-max-content repeat(6, 1fr);
+  grid-template-columns: [heading] max-content repeat(6, 1fr);
+  grid-template-rows: [date] 1fr [weather] 3fr [reliability] 1fr [pops] 1fr [temps-max] 1fr [temps-min] 1fr;
+}
+.weekly__group {
   display: contents;
 }
-.weekly-weather .heading-item {
-  grid-column: heading-item;
+.weekly__heading {
+  grid-column: heading;
   padding: 10px;
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
   font-weight: 700;
 }
-.weekly-weather .heading-item:last-of-type {
+.weekly__heading:last-of-type {
   border-bottom: 1px solid var(--font-color);
 }
-.weekly-weather .date-item,
-.weekly-weather .weather-item,
-.weekly-weather .reliability-item,
-.weekly-weather .pops-item,
-.weekly-weather .temps-max-item,
-.weekly-weather .temps-min-item {
+.weekly__date, .weekly__weather, .weekly__reliability, .weekly__pops, .weekly__temps-max, .weekly__temps-min {
   padding: 10px;
   display: grid;
   place-content: center;
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
 }
-.weekly-weather .date-item:last-of-type,
-.weekly-weather .weather-item:last-of-type,
-.weekly-weather .reliability-item:last-of-type,
-.weekly-weather .pops-item:last-of-type,
-.weekly-weather .temps-max-item:last-of-type,
-.weekly-weather .temps-min-item:last-of-type {
+.weekly__date:last-of-type, .weekly__weather:last-of-type, .weekly__reliability:last-of-type, .weekly__pops:last-of-type, .weekly__temps-max:last-of-type, .weekly__temps-min:last-of-type {
   border-right: 1px solid var(--font-color);
 }
-.weekly-weather .date-item:nth-of-type(1),
-.weekly-weather .weather-item:nth-of-type(1),
-.weekly-weather .reliability-item:nth-of-type(1),
-.weekly-weather .pops-item:nth-of-type(1),
-.weekly-weather .temps-max-item:nth-of-type(1),
-.weekly-weather .temps-min-item:nth-of-type(1) {
+.weekly__date:nth-of-type(1), .weekly__weather:nth-of-type(1), .weekly__reliability:nth-of-type(1), .weekly__pops:nth-of-type(1), .weekly__temps-max:nth-of-type(1), .weekly__temps-min:nth-of-type(1) {
   grid-column: 2/3;
 }
-.weekly-weather .date-item:nth-of-type(2),
-.weekly-weather .weather-item:nth-of-type(2),
-.weekly-weather .reliability-item:nth-of-type(2),
-.weekly-weather .pops-item:nth-of-type(2),
-.weekly-weather .temps-max-item:nth-of-type(2),
-.weekly-weather .temps-min-item:nth-of-type(2) {
+.weekly__date:nth-of-type(2), .weekly__weather:nth-of-type(2), .weekly__reliability:nth-of-type(2), .weekly__pops:nth-of-type(2), .weekly__temps-max:nth-of-type(2), .weekly__temps-min:nth-of-type(2) {
   grid-column: 3/4;
 }
-.weekly-weather .date-item:nth-of-type(3),
-.weekly-weather .weather-item:nth-of-type(3),
-.weekly-weather .reliability-item:nth-of-type(3),
-.weekly-weather .pops-item:nth-of-type(3),
-.weekly-weather .temps-max-item:nth-of-type(3),
-.weekly-weather .temps-min-item:nth-of-type(3) {
+.weekly__date:nth-of-type(3), .weekly__weather:nth-of-type(3), .weekly__reliability:nth-of-type(3), .weekly__pops:nth-of-type(3), .weekly__temps-max:nth-of-type(3), .weekly__temps-min:nth-of-type(3) {
   grid-column: 4/5;
 }
-.weekly-weather .date-item:nth-of-type(4),
-.weekly-weather .weather-item:nth-of-type(4),
-.weekly-weather .reliability-item:nth-of-type(4),
-.weekly-weather .pops-item:nth-of-type(4),
-.weekly-weather .temps-max-item:nth-of-type(4),
-.weekly-weather .temps-min-item:nth-of-type(4) {
+.weekly__date:nth-of-type(4), .weekly__weather:nth-of-type(4), .weekly__reliability:nth-of-type(4), .weekly__pops:nth-of-type(4), .weekly__temps-max:nth-of-type(4), .weekly__temps-min:nth-of-type(4) {
   grid-column: 5/6;
 }
-.weekly-weather .date-item:nth-of-type(5),
-.weekly-weather .weather-item:nth-of-type(5),
-.weekly-weather .reliability-item:nth-of-type(5),
-.weekly-weather .pops-item:nth-of-type(5),
-.weekly-weather .temps-max-item:nth-of-type(5),
-.weekly-weather .temps-min-item:nth-of-type(5) {
+.weekly__date:nth-of-type(5), .weekly__weather:nth-of-type(5), .weekly__reliability:nth-of-type(5), .weekly__pops:nth-of-type(5), .weekly__temps-max:nth-of-type(5), .weekly__temps-min:nth-of-type(5) {
   grid-column: 6/7;
 }
-.weekly-weather .date-item:nth-of-type(6),
-.weekly-weather .weather-item:nth-of-type(6),
-.weekly-weather .reliability-item:nth-of-type(6),
-.weekly-weather .pops-item:nth-of-type(6),
-.weekly-weather .temps-max-item:nth-of-type(6),
-.weekly-weather .temps-min-item:nth-of-type(6) {
+.weekly__date:nth-of-type(6), .weekly__weather:nth-of-type(6), .weekly__reliability:nth-of-type(6), .weekly__pops:nth-of-type(6), .weekly__temps-max:nth-of-type(6), .weekly__temps-min:nth-of-type(6) {
   grid-column: 7/8;
 }
-.weekly-weather .date-item {
-  grid-row: date-item;
+.weekly__date {
+  grid-row: date;
 }
-.weekly-weather .date-item.saturday {
+.weekly__date.saturday {
   color: #00f;
 }
-.weekly-weather .date-item.sunday {
+.weekly__date.sunday {
   color: #f00;
 }
-.weekly-weather .weather-item {
-  grid-row: weather-item;
+.weekly__weather {
+  grid-row: weather;
 }
-.weekly-weather .weather-item .weather-text {
+.weekly__weather-text {
   text-align: center;
 }
-.weekly-weather .reliability-item {
-  grid-row: reliability-item;
+.weekly__reliability {
+  grid-row: reliability;
 }
-.weekly-weather .pops-item {
-  grid-row: pops-item;
+.weekly__pops {
+  grid-row: pops;
 }
-.weekly-weather .temps-max-item {
-  grid-row: temps-max-item;
+.weekly__temps-max {
+  grid-row: temps-max;
   color: #f00;
 }
-.weekly-weather .temps-min-item {
-  grid-row: temps-min-item;
+.weekly__temps-min {
+  grid-row: temps-min;
   color: #00f;
   border-bottom: 1px solid var(--font-color);
 }/*# sourceMappingURL=style.css.map */

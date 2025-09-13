@@ -1,10 +1,33 @@
 @use "../global" as *;
 
+.container {
+  padding: 0 2rem;
+
+  @include tab {
+    padding: 0 3rem;
+  }
+
+  @include pc {
+    padding: 0;
+    margin-inline: auto;
+    width: 90%;
+    max-width: 1100px;
+  }
+}
+
 .dark-mode {
-  margin: 2.4rem 0;
+  margin: 1.6rem 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
+  @include tab {
+    margin: 2.4rem 0;
+  }
+
+  &__text {
+
+  }
 
   &__button {
     //reset
@@ -63,7 +86,10 @@
 }
 
 .prefectures {
+  @include section-margin;
+
   &__title {
+    @include section-title;
   }
 
   &__select {
@@ -71,43 +97,47 @@
 }
 
 .overview {
+  @include section-margin;
+
+  &__title {
+    @include section-title;
+  }
+
   &__table {
-    width: 70%;
-    margin-inline: auto;
-    margin-bottom: 80px;
     display: grid;
     grid-template-columns: max-content 1fr;
+  }
 
-    dt {
-      padding: 10px;
-      border-left: 1px solid var(--font-color);
-      border-top: 1px solid var(--font-color);
-      font-weight: 700;
+  &__heading {
+    padding: 10px;
+    border-left: 1px solid var(--font-color);
+    border-top: 1px solid var(--font-color);
+    font-weight: 700;
 
-      &:last-of-type {
-        border-bottom: 1px solid var(--font-color);
-      }
+    &:last-of-type {
+      border-bottom: 1px solid var(--font-color);
     }
+  }
 
-    dd {
-      padding: 10px;
-      border-left: 1px solid var(--font-color);
-      border-right: 1px solid var(--font-color);
-      border-top: 1px solid var(--font-color);
+  &__publisher,
+  &__report-date-time,
+  &__text {
+    padding: 10px;
+    border-left: 1px solid var(--font-color);
+    border-right: 1px solid var(--font-color);
+    border-top: 1px solid var(--font-color);
 
-      &:last-of-type {
-        border-bottom: 1px solid var(--font-color);
-      }
+    &:last-of-type {
+      border-bottom: 1px solid var(--font-color);
     }
   }
 }
 
 .recent {
-  width: 70%;
-  margin-inline: auto;
-  margin-bottom: 80px;
+  @include section-margin;
 
   &__title {
+    @include section-title;
   }
 
   &__table {
@@ -130,6 +160,12 @@
     &:last-of-type {
       border-bottom: 1px solid var(--font-color);
     }
+  }
+
+  &__note {
+  }
+
+  &__prefectural-capital {
   }
 
   &__date,
@@ -198,25 +234,30 @@
   }
 }
 
-.weekly-weather {
-  width: 70%;
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: [heading-item] max-content repeat(6, 1fr);
-  grid-template-rows: [date-item] 1fr [weather-item] 3fr [reliability-item] 1fr [pops-item] 1fr [temps-max-item] 1fr [temps-min-item] 1fr;
+.weekly {
+  @include section-margin;
+  overflow: scroll;
 
-  .heading,
-  .date,
-  .weather,
-  .reliability,
-  .pops,
-  .temps-max,
-  .temps-min {
+  @include tab {
+    overflow: auto;
+  }
+
+  &__title {
+    @include section-title;
+  }
+
+  &__table {
+    display: grid;
+    grid-template-columns: [heading] max-content repeat(6, 1fr);
+    grid-template-rows: [date] 1fr [weather] 3fr [reliability] 1fr [pops] 1fr [temps-max] 1fr [temps-min] 1fr;
+  }
+
+  &__group {
     display: contents;
   }
 
-  .heading-item {
-    grid-column: heading-item;
+  &__heading {
+    grid-column: heading;
     padding: 10px;
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
@@ -227,12 +268,15 @@
     }
   }
 
-  .date-item,
-  .weather-item,
-  .reliability-item,
-  .pops-item,
-  .temps-max-item,
-  .temps-min-item {
+  &__prefectural-capital {
+  }
+
+  &__date,
+  &__weather,
+  &__reliability,
+  &__pops,
+  &__temps-max,
+  &__temps-min {
     padding: 10px;
     display: grid;
     place-content: center;
@@ -250,8 +294,8 @@
     }
   }
 
-  .date-item {
-    grid-row: date-item;
+  &__date {
+    grid-row: date;
 
     &.saturday {
       color: $blue;
@@ -261,28 +305,33 @@
       color: $red;
     }
   }
-  .weather-item {
-    grid-row: weather-item;
 
-    .weather-image {
-    }
+  &__weather {
+    grid-row: weather;
+  }
 
-    .weather-text {
-      text-align: center;
-    }
+  &__weather-image {
   }
-  .reliability-item {
-    grid-row: reliability-item;
+
+  &__weather-text {
+    text-align: center;
   }
-  .pops-item {
-    grid-row: pops-item;
+
+  &__reliability {
+    grid-row: reliability;
   }
-  .temps-max-item {
-    grid-row: temps-max-item;
+
+  &__pops {
+    grid-row: pops;
+  }
+
+  &__temps-max {
+    grid-row: temps-max;
     color: $red;
   }
-  .temps-min-item {
-    grid-row: temps-min-item;
+
+  &__temps-min {
+    grid-row: temps-min;
     color: $blue;
     border-bottom: 1px solid var(--font-color);
   }

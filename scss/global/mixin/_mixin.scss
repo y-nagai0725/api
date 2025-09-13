@@ -14,15 +14,29 @@
   }
 }
 
-//セクションinner共通設定
-@mixin section-inner {
-  padding: 0 30px;
+@mixin section-margin {
+  margin-bottom: 2.4rem;
 
   @include tab {
-    padding: 0 40px;
+    margin-bottom: 3.2rem;
   }
 
   @include pc {
-    padding: 0 80px;
+    margin-bottom: 4rem;
+  }
+}
+
+@mixin section-title {
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  font-size: clamp(14px, 1.4rem, 16px);
+
+  @include tab {
+    margin-bottom: 1.6rem;
+    font-size: clamp(16px, 1.6rem, 20px);
+  }
+
+  @include pc {
+    font-size: clamp(18px, 2rem, 20px);
   }
 }
