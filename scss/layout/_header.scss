@@ -1,4 +1,45 @@
 @use "../global" as *;
 
 .header {
+  padding: 2rem;
+  background-color: $light-blue;
+
+  @include tab {
+    padding: 3rem;
+  }
+
+  @include pc {
+    padding: 3.2rem;
+  }
+
+  &__nav {
+  }
+
+  &__list {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.6rem;
+
+    @include tab {
+      gap: 2.4rem;
+    }
+
+    @include pc {
+      gap: 3.2rem;
+    }
+  }
+
+  &__link {
+    color: $white;
+    font-weight: 700;
+    font-size: clamp(11px, 1.1rem, 12px);
+
+    @include tab {
+      font-size: clamp(12px, 1.2rem, 14px);
+    }
+
+    @include pc {
+      font-size: clamp(14px, 1.6rem, 16px);
+    }
+  }
 }

@@ -1,5 +1,127 @@
 @use "../global" as *;
 
 .footer {
+  padding: 4rem 0 1.6rem;
+  background-color: $light-blue;
 
+  @include tab {
+    padding: 4.8rem 0 2.4rem;
+  }
+
+  @include pc {
+    padding: 5.6rem 0 3.2rem;
+  }
+
+  &__inner {
+    @include contents-width;
+  }
+
+  &__box-wrapper {
+    margin-bottom: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+
+    @include tab {
+      margin-bottom: 3.2rem;
+      gap: 4rem;
+    }
+
+    @include pc {
+      margin-bottom: 4rem;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 0;
+    }
+  }
+
+  &__left-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    @include tab {
+      gap: 1.4rem;
+    }
+
+    @include pc {
+      gap: 2.2rem;
+    }
+  }
+
+  &__home-link {
+    padding: 10px 0;
+    color: $white;
+    font-weight: 700;
+    font-size: clamp(18px, 1.8rem, 20px);
+
+    @include tab {
+      font-size: clamp(20px, 2rem, 22px);
+    }
+
+    @include pc {
+      font-size: 24px;
+    }
+  }
+
+  &__text {
+    color: $white;
+    font-weight: 700;
+    font-size: clamp(11px, 1.1rem, 12px);
+
+    @include tab {
+      font-size: clamp(12px, 1.2rem, 13px);
+    }
+
+    @include pc {
+      font-size: 14px;
+    }
+  }
+
+  &__right-box {
+  }
+
+  &__list {
+    display: flex;
+    gap: 2.4rem;
+
+    @include tab {
+      gap: 3.2rem;
+    }
+
+    @include pc {
+      gap: 4rem;
+    }
+  }
+
+  &__link {
+    padding: 10px 0;
+    color: $white;
+    font-weight: 700;
+    font-size: clamp(14px, 1.4rem, 16px);
+
+    @include tab {
+      font-size: clamp(16px, 1.6rem, 18px);
+    }
+
+    @include pc {
+      font-size: clamp(16px, 1.8rem, 18px);
+    }
+  }
+
+  &__copyright {
+    display: block;
+    color: $white;
+    font-size: 10px;
+    text-align: center;
+
+    @include tab {
+      font-size: 11px;
+    }
+
+    @include pc {
+      font-size: 12px;
+      text-align: right;
+    }
+  }
 }

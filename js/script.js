@@ -218,12 +218,12 @@ function getDetailWeatherData(cityNumber) {
 
       //今日
       const today = new Date();
-      const todayFormattedString = "今日：" + convertDateFormattedString(today);
+      const todayFormattedString = convertDateFormattedString(today);
 
       //明日
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
-      const tomorrowFormattedString = "明日：" + convertDateFormattedString(tomorrow);
+      const tomorrowFormattedString = convertDateFormattedString(tomorrow);
       //天気
       const todayWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[0];
       const tomorrowWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[1];
@@ -282,7 +282,7 @@ function getDetailWeatherData(cityNumber) {
         name.textContent = tempsArea;
       });
 
-      document.querySelectorAll(".recent__date").forEach((item, index) => {
+      document.querySelectorAll(".recent__date-item").forEach((item, index) => {
         const date = index === 0 ? todayFormattedString : tomorrowFormattedString;
         item.textContent = date;
         if (date.includes("(土)")) {
