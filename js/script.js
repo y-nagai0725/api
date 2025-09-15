@@ -1,3 +1,6 @@
+const html = document.querySelector("html");
+const header = document.querySelector(".header");
+const footer = document.querySelector(".footer");
 const selectedCity = localStorage.getItem("selectedCity");
 const mode = localStorage.getItem("mode");
 const darkModeButton = document.querySelector(".dark-mode__button");
@@ -139,17 +142,23 @@ if (selectedCity) {
 
 if (mode) {
   if (mode === "dark") {
-    document.querySelector("html").classList.add("dark");
+    html.classList.add("dark");
+    header.classList.add("dark");
+    footer.classList.add("dark");
     darkModeButton.checked = true;
   }
 }
 
 darkModeButton.addEventListener("change", () => {
   if (darkModeButton.checked) {
-    document.querySelector("html").classList.add("dark");
+    html.classList.add("dark");
+    header.classList.add("dark");
+    footer.classList.add("dark");
     localStorage.setItem("mode", "dark");
   } else {
-    document.querySelector("html").classList.remove("dark");
+    html.classList.remove("dark");
+    header.classList.remove("dark");
+    footer.classList.remove("dark");
     localStorage.setItem("mode", "light");
   }
 });
