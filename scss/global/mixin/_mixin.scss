@@ -60,6 +60,7 @@
   }
 
   @include pc {
+    margin-bottom: 2rem;
     font-size: clamp(18px, 2rem, 20px);
   }
 }

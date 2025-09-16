@@ -624,6 +624,7 @@ a {
 }
 @media screen and (min-width: 1024px) {
   .prefectures__title {
+    margin-bottom: 2rem;
     font-size: clamp(18px, 2rem, 20px);
   }
 }
@@ -653,31 +654,70 @@ a {
 }
 @media screen and (min-width: 1024px) {
   .overview__title {
+    margin-bottom: 2rem;
     font-size: clamp(18px, 2rem, 20px);
   }
 }
 .overview__table {
   display: grid;
-  grid-template-columns: -webkit-max-content 1fr;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: [heading] -webkit-max-content [description] 1fr;
+  grid-template-columns: [heading] max-content [description] 1fr;
+  grid-template-rows: repeat(3, -webkit-max-content);
+  grid-template-rows: repeat(3, max-content);
+}
+.overview__group {
+  display: contents;
 }
 .overview__heading {
+  grid-column: heading;
   padding: 10px;
   border-left: 1px solid var(--font-color);
   border-top: 1px solid var(--font-color);
   font-weight: 700;
+  font-size: clamp(12px, 1.2rem, 13px);
+}
+@media screen and (min-width: 768px) {
+  .overview__heading {
+    font-size: clamp(13px, 1.3rem, 14px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .overview__heading {
+    font-size: clamp(14px, 1.5rem, 15px);
+  }
 }
 .overview__heading:last-of-type {
   border-bottom: 1px solid var(--font-color);
 }
 .overview__publisher, .overview__report-date-time, .overview__text {
+  grid-column: description;
   padding: 10px;
   border-left: 1px solid var(--font-color);
   border-right: 1px solid var(--font-color);
   border-top: 1px solid var(--font-color);
+  font-size: clamp(12px, 1.2rem, 13px);
+}
+@media screen and (min-width: 768px) {
+  .overview__publisher, .overview__report-date-time, .overview__text {
+    font-size: clamp(13px, 1.3rem, 14px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .overview__publisher, .overview__report-date-time, .overview__text {
+    font-size: clamp(14px, 1.5rem, 15px);
+  }
 }
 .overview__publisher:last-of-type, .overview__report-date-time:last-of-type, .overview__text:last-of-type {
   border-bottom: 1px solid var(--font-color);
+}
+.overview__publisher {
+  grid-row: 1;
+}
+.overview__report-date-time {
+  grid-row: 2;
+}
+.overview__text {
+  grid-row: 3;
 }
 
 .recent {
@@ -706,6 +746,7 @@ a {
 }
 @media screen and (min-width: 1024px) {
   .recent__title {
+    margin-bottom: 2rem;
     font-size: clamp(18px, 2rem, 20px);
   }
 }
@@ -818,6 +859,7 @@ a {
 }
 @media screen and (min-width: 1024px) {
   .weekly__title {
+    margin-bottom: 2rem;
     font-size: clamp(18px, 2rem, 20px);
   }
 }

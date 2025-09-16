@@ -117,14 +117,29 @@
 
   &__table {
     display: grid;
-    grid-template-columns: max-content 1fr;
+    grid-template-columns: [heading] max-content [description] 1fr;
+    grid-template-rows: repeat(3, max-content);
+  }
+
+  &__group {
+    display: contents;
   }
 
   &__heading {
+    grid-column: heading;
     padding: 10px;
     border-left: 1px solid var(--font-color);
     border-top: 1px solid var(--font-color);
     font-weight: 700;
+    font-size: clamp(12px, 1.2rem, 13px);
+
+    @include tab {
+      font-size: clamp(13px, 1.3rem, 14px);
+    }
+
+    @include pc {
+      font-size: clamp(14px, 1.5rem, 15px);
+    }
 
     &:last-of-type {
       border-bottom: 1px solid var(--font-color);
@@ -134,14 +149,36 @@
   &__publisher,
   &__report-date-time,
   &__text {
+    grid-column: description;
     padding: 10px;
     border-left: 1px solid var(--font-color);
     border-right: 1px solid var(--font-color);
     border-top: 1px solid var(--font-color);
+    font-size: clamp(12px, 1.2rem, 13px);
+
+    @include tab {
+      font-size: clamp(13px, 1.3rem, 14px);
+    }
+
+    @include pc {
+      font-size: clamp(14px, 1.5rem, 15px);
+    }
 
     &:last-of-type {
       border-bottom: 1px solid var(--font-color);
     }
+  }
+
+  &__publisher {
+    grid-row: 1;
+  }
+
+  &__report-date-time {
+    grid-row: 2;
+  }
+
+  &__text {
+    grid-row: 3;
   }
 }
 
