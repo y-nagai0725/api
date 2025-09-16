@@ -192,7 +192,7 @@
   &__table {
     display: grid;
     grid-template-columns: [heading] max-content repeat(2, 1fr);
-    grid-template-rows: [date] 1fr [weather] 3fr [wave] 1fr [pops] 1fr [temps-max] 1fr [temps-min] 1fr;
+    grid-template-rows: [date] 1fr [weather] 2fr [wave] 1fr [pops] 1fr [temps-max] 1fr [temps-min] 1fr;
   }
 
   &__group {
@@ -205,6 +205,15 @@
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
     font-weight: 700;
+    font-size: clamp(12px, 1.2rem, 13px);
+
+    @include tab {
+      font-size: clamp(13px, 1.3rem, 14px);
+    }
+
+    @include pc {
+      font-size: clamp(13px, 1.4rem, 14px);
+    }
 
     &:last-of-type {
       border-bottom: 1px solid var(--font-color);
@@ -212,9 +221,33 @@
   }
 
   &__note {
+    font-weight: 400;
+    font-size: 10px;
+
+    @include tab {
+      font-size: 11px;
+    }
+
+    @include pc {
+      font-size: 12px;
+    }
+  }
+
+  &__br {
+    @include pc {
+      display: none;
+    }
   }
 
   &__prefectural-capital {
+  }
+
+  &__high {
+    color: $red;
+  }
+
+  &__low {
+    color: $blue;
   }
 
   &__date,
@@ -228,6 +261,15 @@
     place-content: center;
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
+    font-size: clamp(11px, 1.1rem, 12px);
+
+    @include tab {
+      font-size: clamp(12px, 1.2rem, 13px);
+    }
+
+    @include pc {
+      font-size: 13px;
+    }
 
     &:last-of-type {
       border-right: 1px solid var(--font-color);
@@ -303,8 +345,12 @@
 
   &__table {
     display: grid;
-    grid-template-columns: [heading] max-content repeat(6, 1fr);
-    grid-template-rows: [date] 1fr [weather] 3fr [reliability] 1fr [pops] 1fr [temps-max] 1fr [temps-min] 1fr;
+    grid-template-columns: [heading] max-content repeat(6, max-content);
+    grid-template-rows: [date] 1fr [weather] 2fr [reliability] 1fr [pops] 1fr [temps-max] 1fr [temps-min] 1fr;
+
+    @include tab {
+      grid-template-columns: [heading] max-content repeat(6, 1fr);
+    }
   }
 
   &__group {
@@ -317,6 +363,15 @@
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
     font-weight: 700;
+    font-size: clamp(12px, 1.2rem, 13px);
+
+    @include tab {
+      font-size: clamp(13px, 1.3rem, 14px);
+    }
+
+    @include pc {
+      font-size: clamp(13px, 1.4rem, 14px);
+    }
 
     &:last-of-type {
       border-bottom: 1px solid var(--font-color);
@@ -324,6 +379,20 @@
   }
 
   &__prefectural-capital {
+  }
+
+  &__br {
+    @include pc {
+      display: none;
+    }
+  }
+
+  &__high {
+    color: $red;
+  }
+
+  &__low {
+    color: $blue;
   }
 
   &__date,
@@ -337,6 +406,15 @@
     place-content: center;
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
+    font-size: clamp(11px, 1.1rem, 12px);
+
+    @include tab {
+      font-size: clamp(12px, 1.2rem, 13px);
+    }
+
+    @include pc {
+      font-size: 13px;
+    }
 
     &:last-of-type {
       border-right: 1px solid var(--font-color);

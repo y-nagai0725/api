@@ -754,7 +754,7 @@ a {
   display: grid;
   grid-template-columns: [heading] -webkit-max-content repeat(2, 1fr);
   grid-template-columns: [heading] max-content repeat(2, 1fr);
-  grid-template-rows: [date] 1fr [weather] 3fr [wave] 1fr [pops] 1fr [temps-max] 1fr [temps-min] 1fr;
+  grid-template-rows: [date] 1fr [weather] 2fr [wave] 1fr [pops] 1fr [temps-max] 1fr [temps-min] 1fr;
 }
 .recent__group {
   display: contents;
@@ -765,9 +765,45 @@ a {
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
   font-weight: 700;
+  font-size: clamp(12px, 1.2rem, 13px);
+}
+@media screen and (min-width: 768px) {
+  .recent__heading {
+    font-size: clamp(13px, 1.3rem, 14px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .recent__heading {
+    font-size: clamp(13px, 1.4rem, 14px);
+  }
 }
 .recent__heading:last-of-type {
   border-bottom: 1px solid var(--font-color);
+}
+.recent__note {
+  font-weight: 400;
+  font-size: 10px;
+}
+@media screen and (min-width: 768px) {
+  .recent__note {
+    font-size: 11px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .recent__note {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .recent__br {
+    display: none;
+  }
+}
+.recent__high {
+  color: #f00;
+}
+.recent__low {
+  color: #00f;
 }
 .recent__date, .recent__weather, .recent__wave, .recent__pops, .recent__temps-max, .recent__temps-min {
   padding: 10px;
@@ -775,6 +811,17 @@ a {
   place-content: center;
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
+  font-size: clamp(11px, 1.1rem, 12px);
+}
+@media screen and (min-width: 768px) {
+  .recent__date, .recent__weather, .recent__wave, .recent__pops, .recent__temps-max, .recent__temps-min {
+    font-size: clamp(12px, 1.2rem, 13px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .recent__date, .recent__weather, .recent__wave, .recent__pops, .recent__temps-max, .recent__temps-min {
+    font-size: 13px;
+  }
 }
 .recent__date:last-of-type, .recent__weather:last-of-type, .recent__wave:last-of-type, .recent__pops:last-of-type, .recent__temps-max:last-of-type, .recent__temps-min:last-of-type {
   border-right: 1px solid var(--font-color);
@@ -865,9 +912,15 @@ a {
 }
 .weekly__table {
   display: grid;
-  grid-template-columns: [heading] -webkit-max-content repeat(6, 1fr);
-  grid-template-columns: [heading] max-content repeat(6, 1fr);
-  grid-template-rows: [date] 1fr [weather] 3fr [reliability] 1fr [pops] 1fr [temps-max] 1fr [temps-min] 1fr;
+  grid-template-columns: [heading] -webkit-max-content repeat(6, -webkit-max-content);
+  grid-template-columns: [heading] max-content repeat(6, max-content);
+  grid-template-rows: [date] 1fr [weather] 2fr [reliability] 1fr [pops] 1fr [temps-max] 1fr [temps-min] 1fr;
+}
+@media screen and (min-width: 768px) {
+  .weekly__table {
+    grid-template-columns: [heading] -webkit-max-content repeat(6, 1fr);
+    grid-template-columns: [heading] max-content repeat(6, 1fr);
+  }
 }
 .weekly__group {
   display: contents;
@@ -878,9 +931,31 @@ a {
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
   font-weight: 700;
+  font-size: clamp(12px, 1.2rem, 13px);
+}
+@media screen and (min-width: 768px) {
+  .weekly__heading {
+    font-size: clamp(13px, 1.3rem, 14px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .weekly__heading {
+    font-size: clamp(13px, 1.4rem, 14px);
+  }
 }
 .weekly__heading:last-of-type {
   border-bottom: 1px solid var(--font-color);
+}
+@media screen and (min-width: 1024px) {
+  .weekly__br {
+    display: none;
+  }
+}
+.weekly__high {
+  color: #f00;
+}
+.weekly__low {
+  color: #00f;
 }
 .weekly__date, .weekly__weather, .weekly__reliability, .weekly__pops, .weekly__temps-max, .weekly__temps-min {
   padding: 10px;
@@ -888,6 +963,17 @@ a {
   place-content: center;
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
+  font-size: clamp(11px, 1.1rem, 12px);
+}
+@media screen and (min-width: 768px) {
+  .weekly__date, .weekly__weather, .weekly__reliability, .weekly__pops, .weekly__temps-max, .weekly__temps-min {
+    font-size: clamp(12px, 1.2rem, 13px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .weekly__date, .weekly__weather, .weekly__reliability, .weekly__pops, .weekly__temps-max, .weekly__temps-min {
+    font-size: 13px;
+  }
 }
 .weekly__date:last-of-type, .weekly__weather:last-of-type, .weekly__reliability:last-of-type, .weekly__pops:last-of-type, .weekly__temps-max:last-of-type, .weekly__temps-min:last-of-type {
   border-right: 1px solid var(--font-color);
