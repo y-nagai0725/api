@@ -167,6 +167,7 @@ prefecturesSelectBox.addEventListener("change", () => {
   const city = prefecturesSelectBox.value;
   if (city === "") {
     localStorage.removeItem("selectedCity");
+    clearInputWeatherData();
   } else {
     localStorage.setItem("selectedCity", city);
     getOverviewWeatherData(city);
@@ -418,4 +419,65 @@ function getDetailWeatherData(cityNumber) {
     .catch(error => {
       console.error('データの取得に失敗しちゃった…', error);
     });
+}
+
+function clearInputWeatherData() {
+  //overview部分
+  document.querySelector(".overview__publisher").textContent = "";
+  document.querySelector(".overview__report-date-time").textContent = "";
+  document.querySelector(".overview__text").textContent = "";
+
+  //recent部分
+  document.querySelectorAll(".recent__prefectural-capital").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".recent__date-item").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".recent__weather-image").forEach(element => {
+    element.src = "";
+    element.alt = "";
+  });
+  document.querySelectorAll(".recent__weather-text").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".recent__wave").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".recent__pops").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".recent__temps-max").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".recent__temps-min").forEach(element => {
+    element.textContent = "";
+  });
+
+  //weekly部分
+  document.querySelectorAll(".weekly__prefectural-capital").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".weekly__date").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".weekly__weather-image").forEach(element => {
+    element.src = "";
+    element.alt = "";
+  });
+  document.querySelectorAll(".weekly__weather-text").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".weekly__reliability").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".weekly__pops").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".weekly__temps-max").forEach(element => {
+    element.textContent = "";
+  });
+  document.querySelectorAll(".weekly__temps-min").forEach(element => {
+    element.textContent = "";
+  });
 }
