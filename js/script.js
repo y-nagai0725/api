@@ -180,11 +180,11 @@ function getOverviewWeatherData(cityNumber) {
     .then(data => {
       const publisher = data.publishingOffice;
       const reportDateTime = data.reportDatetime;
-      const overviewText = data.text;
+      const overviewText = data.text.replace(/\r\n|\n|\r/g, "<br>").replace(/\s/g, "");
 
       document.querySelector(".overview__publisher").textContent = publisher;
       document.querySelector(".overview__report-date-time").textContent = convertDateFormattedString(reportDateTime, true);
-      document.querySelector(".overview__text").textContent = overviewText;
+      document.querySelector(".overview__text").innerHTML = overviewText;
     })
     .catch(error => {
       console.error('データの取得に失敗しちゃった…', error);
