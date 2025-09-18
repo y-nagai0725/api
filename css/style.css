@@ -1084,4 +1084,7 @@ a {
   grid-row: temps-min;
   color: #00f;
   border-bottom: 1px solid var(--font-color);
+}
+.weekly .custom-scroll-hint-icon {
+  background-color: #1bb4d4;
 }/*# sourceMappingURL=style.css.map */

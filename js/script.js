@@ -127,6 +127,13 @@ const weatherCodes = {
   450: ['400.svg', '雪で雷を伴う'],
 };
 
+new ScrollHint(".js-scroll-hint", {
+  i18n: {
+    scrollable: "横スクロール",
+  },
+  scrollHintIconAppendClass: 'custom-scroll-hint-icon',
+});
+
 if (selectedCity) {
   getOverviewWeatherData(selectedCity);
   getDetailWeatherData(selectedCity);
