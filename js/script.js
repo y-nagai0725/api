@@ -214,6 +214,7 @@ function getDetailWeatherData(cityNumber) {
   fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${cityNumber}.json`)
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       //観測気象台
       const publishingOffice = data[1].publishingOffice;
 
@@ -232,12 +233,11 @@ function getDetailWeatherData(cityNumber) {
       }
 
       //今日
-      const today = new Date();
+      const today = data[0].timeSeries[0].timeDefines[0];
       const todayFormattedString = convertDateFormattedString(today);
 
       //明日
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
+      const tomorrow = data[0].timeSeries[0].timeDefines[1];
       const tomorrowFormattedString = convertDateFormattedString(tomorrow);
       //天気
       const todayWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[0];
@@ -295,6 +295,26 @@ function getDetailWeatherData(cityNumber) {
       //今日、明日データの設置
       document.querySelectorAll(".recent__prefectural-capital").forEach(name => {
         name.textContent = tempsArea;
+      });
+
+      document.querySelectorAll(".recent__date-label").forEach((label, index) => {
+        if (index === 0) {
+          if (todayFormattedString === convertDateFormattedString(new Date())) {
+            label.textContent = "今日";
+            setRecentTableStyle();
+          } else {
+            label.textContent = "昨日";
+            setRecentTableStyle(true);
+          }
+        } else if (index === 1) {
+          const tomorrowDate = new Date();
+          tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+          if (tomorrowFormattedString === convertDateFormattedString(new Date())) {
+            label.textContent = "今日";
+          } else if (tomorrowFormattedString === convertDateFormattedString(tomorrowDate)) {
+            label.textContent = "明日";
+          }
+        }
       });
 
       document.querySelectorAll(".recent__date-item").forEach((item, index) => {
@@ -425,6 +445,24 @@ function getDetailWeatherData(cityNumber) {
     });
 }
 
+function setRecentTableStyle(disabled = false) {
+  if (disabled) {
+    document.querySelector(".recent__date").classList.add("disabled");
+    document.querySelector(".recent__weather").classList.add("disabled");
+    document.querySelector(".recent__wave").classList.add("disabled");
+    document.querySelector(".recent__pops").classList.add("disabled");
+    document.querySelector(".recent__temps-max").classList.add("disabled");
+    document.querySelector(".recent__temps-min").classList.add("disabled");
+  } else {
+    document.querySelector(".recent__date").classList.remove("disabled");
+    document.querySelector(".recent__weather").classList.remove("disabled");
+    document.querySelector(".recent__wave").classList.remove("disabled");
+    document.querySelector(".recent__pops").classList.remove("disabled");
+    document.querySelector(".recent__temps-max").classList.remove("disabled");
+    document.querySelector(".recent__temps-min").classList.remove("disabled");
+  }
+}
+
 function clearInputOverviewWeatherData() {
   //overview部分
   document.querySelector(".overview__publisher").textContent = "";
@@ -459,6 +497,7 @@ function clearInputDetailWeatherData() {
   document.querySelectorAll(".recent__temps-min").forEach(element => {
     element.textContent = "";
   });
+  setRecentTableStyle();
 
   //weekly部分
   document.querySelectorAll(".weekly__prefectural-capital").forEach(element => {

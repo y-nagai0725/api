@@ -320,6 +320,31 @@
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
     font-size: clamp(11px, 1.1rem, 12px);
+    position: relative;
+
+    &.disabled {
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, calc(-50% + 3px));
+        width: 50%;
+        height: 2px;
+        background-color: var(--font-color);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, calc(-50% - 3px));
+        width: 50%;
+        height: 2px;
+        background-color: var(--font-color);
+      }
+    }
 
     @include tab {
       font-size: clamp(12px, 1.2rem, 13px);
@@ -527,7 +552,7 @@
     border-bottom: 1px solid var(--font-color);
   }
 
-  .custom-scroll-hint-icon{
+  .custom-scroll-hint-icon {
     background-color: $light-blue;
   }
 }

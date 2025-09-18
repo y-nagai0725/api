@@ -871,6 +871,29 @@ a {
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
   font-size: clamp(11px, 1.1rem, 12px);
+  position: relative;
+}
+.recent__date.disabled::before, .recent__weather.disabled::before, .recent__wave.disabled::before, .recent__pops.disabled::before, .recent__temps-max.disabled::before, .recent__temps-min.disabled::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, calc(-50% + 3px));
+          transform: translate(-50%, calc(-50% + 3px));
+  width: 50%;
+  height: 2px;
+  background-color: var(--font-color);
+}
+.recent__date.disabled::after, .recent__weather.disabled::after, .recent__wave.disabled::after, .recent__pops.disabled::after, .recent__temps-max.disabled::after, .recent__temps-min.disabled::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, calc(-50% - 3px));
+          transform: translate(-50%, calc(-50% - 3px));
+  width: 50%;
+  height: 2px;
+  background-color: var(--font-color);
 }
 @media screen and (min-width: 768px) {
   .recent__date, .recent__weather, .recent__wave, .recent__pops, .recent__temps-max, .recent__temps-min {
