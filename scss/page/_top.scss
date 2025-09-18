@@ -99,12 +99,70 @@
 
 .prefectures {
   @include section-margin;
+  display: grid;
+  place-content: center;
 
   &__title {
     @include section-title;
+    text-align: center;
+  }
+
+  &__select-wrapper {
+    position: relative;
+
+    &::after {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      right: 0.8rem;
+      width: 0.6rem;
+      aspect-ratio: 1;
+      border-left: 2px solid var(--font-color);
+      border-bottom: 2px solid var(--font-color);
+      transform: translateY(-50%) rotate(-45deg);
+      transform-origin: center;
+    }
+
+    @include tab {
+      &::after {
+        right: 1.2rem;
+        width: 1rem;
+      }
+    }
+
+    @include pc {
+      &::after {
+        right: 1.6rem;
+        width: 1.4rem;
+      }
+    }
   }
 
   &__select {
+    cursor: pointer;
+    border: 1px solid var(--font-color);
+    padding: 0.8rem 4rem 0.8rem 0.8rem;
+    font-size: clamp(14px, 1.4rem, 16px);
+
+    @include tab {
+      padding: 1.2rem 4.4rem 1.2rem 1.2rem;
+      font-size: clamp(16px, 1.6rem, 20px);
+    }
+
+    @include pc {
+      padding: 1.6rem 4.8rem 1.6rem 1.6rem;
+      font-size: clamp(18px, 2rem, 20px);
+    }
+  }
+
+  &__option {
+    background-color: var(--background-color);
+    color: var(--font-color);
+
+    &[selected][disabled] {
+      display: none;
+    }
   }
 }
 

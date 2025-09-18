@@ -136,17 +136,13 @@ if (selectedCity) {
       option.selected = true;
     }
   });
-} else {
-  console.log("まだ選択していないよ");
 }
 
-if (mode) {
-  if (mode === "dark") {
-    html.classList.add("dark");
-    header.classList.add("dark");
-    footer.classList.add("dark");
-    darkModeButton.checked = true;
-  }
+if (mode === "dark") {
+  html.classList.add("dark");
+  header.classList.add("dark");
+  footer.classList.add("dark");
+  darkModeButton.checked = true;
 }
 
 darkModeButton.addEventListener("change", () => {
@@ -167,9 +163,9 @@ prefecturesSelectBox.addEventListener("change", () => {
   const city = prefecturesSelectBox.value;
   if (city === "") {
     localStorage.removeItem("selectedCity");
-    clearInputWeatherData();
+    clearInputOverviewWeatherData();
+    clearInputDetailWeatherData();
   } else {
-    localStorage.setItem("selectedCity", city);
     getOverviewWeatherData(city);
     getDetailWeatherData(city);
   }
@@ -186,9 +182,12 @@ function getOverviewWeatherData(cityNumber) {
       document.querySelector(".overview__publisher").textContent = publisher;
       document.querySelector(".overview__report-date-time").textContent = convertDateFormattedString(reportDateTime, true);
       document.querySelector(".overview__text").innerHTML = overviewText;
+
+      localStorage.setItem("selectedCity", cityNumber);
     })
     .catch(error => {
-      console.error('データの取得に失敗しちゃった…', error);
+      console.error("地域コード:" + cityNumber + "の天気概要データ取得にてエラーが発生しています。", error);
+      clearInputOverviewWeatherData();
     });
 }
 
@@ -203,7 +202,6 @@ function convertDateFormattedString(timeDefine, needsTimeString = false) {
 
   return formattedString;
 }
-
 
 function getDetailWeatherData(cityNumber) {
   fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${cityNumber}.json`)
@@ -413,20 +411,21 @@ function getDetailWeatherData(cityNumber) {
         const tempMin = weeklyWeatherTempsMin[index];
         item.textContent = tempMin === "" ? "-" : tempMin;
       });
-
-
     })
     .catch(error => {
-      console.error('データの取得に失敗しちゃった…', error);
+      console.error("地域コード:" + cityNumber + "の天気詳細データ取得にてエラーが発生しています。", error);
+      clearInputDetailWeatherData();
     });
 }
 
-function clearInputWeatherData() {
+function clearInputOverviewWeatherData() {
   //overview部分
   document.querySelector(".overview__publisher").textContent = "";
   document.querySelector(".overview__report-date-time").textContent = "";
   document.querySelector(".overview__text").textContent = "";
+}
 
+function clearInputDetailWeatherData() {
   //recent部分
   document.querySelectorAll(".recent__prefectural-capital").forEach(element => {
     element.textContent = "";

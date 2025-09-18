@@ -600,6 +600,8 @@ a {
 
 .prefectures {
   margin-bottom: 2.4rem;
+  display: grid;
+  place-content: center;
 }
 @media screen and (min-width: 768px) {
   .prefectures {
@@ -615,6 +617,7 @@ a {
   margin-bottom: 0.8rem;
   font-weight: 700;
   font-size: clamp(14px, 1.4rem, 16px);
+  text-align: center;
 }
 @media screen and (min-width: 768px) {
   .prefectures__title {
@@ -628,6 +631,62 @@ a {
     font-size: clamp(18px, 2rem, 20px);
   }
 }
+.prefectures__select-wrapper {
+  position: relative;
+}
+.prefectures__select-wrapper::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  right: 0.8rem;
+  width: 0.6rem;
+  aspect-ratio: 1;
+  border-left: 2px solid var(--font-color);
+  border-bottom: 2px solid var(--font-color);
+  -webkit-transform: translateY(-50%) rotate(-45deg);
+          transform: translateY(-50%) rotate(-45deg);
+  -webkit-transform-origin: center;
+          transform-origin: center;
+}
+@media screen and (min-width: 768px) {
+  .prefectures__select-wrapper::after {
+    right: 1.2rem;
+    width: 1rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .prefectures__select-wrapper::after {
+    right: 1.6rem;
+    width: 1.4rem;
+  }
+}
+.prefectures__select {
+  cursor: pointer;
+  border: 1px solid var(--font-color);
+  padding: 0.8rem 4rem 0.8rem 0.8rem;
+  font-size: clamp(14px, 1.4rem, 16px);
+}
+@media screen and (min-width: 768px) {
+  .prefectures__select {
+    padding: 1.2rem 4.4rem 1.2rem 1.2rem;
+    font-size: clamp(16px, 1.6rem, 20px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .prefectures__select {
+    padding: 1.6rem 4.8rem 1.6rem 1.6rem;
+    font-size: clamp(18px, 2rem, 20px);
+  }
+}
+.prefectures__option {
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+.prefectures__option[selected][disabled] {
+  display: none;
+}
+
 .overview {
   margin-bottom: 2.4rem;
 }
