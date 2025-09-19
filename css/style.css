@@ -505,17 +505,28 @@ a {
 }
 
 .top {
-  margin: 4rem 0 4rem;
+  margin-bottom: 2.4rem;
+  margin-top: 2.4rem;
   position: relative;
 }
 @media screen and (min-width: 768px) {
   .top {
-    margin-bottom: 6rem 0 6rem;
+    margin-bottom: 3.2rem;
   }
 }
 @media screen and (min-width: 1024px) {
   .top {
-    margin-bottom: 8rem 0 8rem;
+    margin-bottom: 4rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .top {
+    margin-top: 3.2rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .top {
+    margin-top: 4rem;
   }
 }
 .top__title {
@@ -669,13 +680,13 @@ a {
 }
 @media screen and (min-width: 768px) {
   .prefectures__select {
-    padding: 1.2rem 4.4rem 1.2rem 1.2rem;
+    padding: 1rem 4.4rem 1rem 1rem;
     font-size: clamp(16px, 1.6rem, 20px);
   }
 }
 @media screen and (min-width: 1024px) {
   .prefectures__select {
-    padding: 1.6rem 4.8rem 1.6rem 1.6rem;
+    padding: 1.2rem 4.8rem 1.2rem 1.2rem;
     font-size: clamp(18px, 2rem, 20px);
   }
 }
@@ -685,98 +696,6 @@ a {
 }
 .prefectures__option[selected][disabled] {
   display: none;
-}
-
-.overview {
-  margin-bottom: 2.4rem;
-}
-@media screen and (min-width: 768px) {
-  .overview {
-    margin-bottom: 3.2rem;
-  }
-}
-@media screen and (min-width: 1024px) {
-  .overview {
-    margin-bottom: 4rem;
-  }
-}
-.overview__title {
-  margin-bottom: 0.8rem;
-  font-weight: 700;
-  font-size: clamp(14px, 1.4rem, 16px);
-}
-@media screen and (min-width: 768px) {
-  .overview__title {
-    margin-bottom: 1.6rem;
-    font-size: clamp(16px, 1.6rem, 20px);
-  }
-}
-@media screen and (min-width: 1024px) {
-  .overview__title {
-    margin-bottom: 2rem;
-    font-size: clamp(18px, 2rem, 20px);
-  }
-}
-.overview__table {
-  display: grid;
-  grid-template-columns: [heading] -webkit-max-content [description] 1fr;
-  grid-template-columns: [heading] max-content [description] 1fr;
-  grid-template-rows: repeat(3, -webkit-max-content);
-  grid-template-rows: repeat(3, max-content);
-}
-.overview__group {
-  display: contents;
-}
-.overview__heading {
-  grid-column: heading;
-  padding: 10px;
-  border-left: 1px solid var(--font-color);
-  border-top: 1px solid var(--font-color);
-  font-weight: 700;
-  font-size: clamp(12px, 1.2rem, 13px);
-}
-@media screen and (min-width: 768px) {
-  .overview__heading {
-    font-size: clamp(13px, 1.3rem, 14px);
-  }
-}
-@media screen and (min-width: 1024px) {
-  .overview__heading {
-    font-size: clamp(14px, 1.5rem, 15px);
-  }
-}
-.overview__heading:last-of-type {
-  border-bottom: 1px solid var(--font-color);
-}
-.overview__publisher, .overview__report-date-time, .overview__text {
-  grid-column: description;
-  padding: 10px;
-  border-left: 1px solid var(--font-color);
-  border-right: 1px solid var(--font-color);
-  border-top: 1px solid var(--font-color);
-  font-size: clamp(12px, 1.2rem, 13px);
-}
-@media screen and (min-width: 768px) {
-  .overview__publisher, .overview__report-date-time, .overview__text {
-    font-size: clamp(13px, 1.3rem, 14px);
-  }
-}
-@media screen and (min-width: 1024px) {
-  .overview__publisher, .overview__report-date-time, .overview__text {
-    font-size: clamp(14px, 1.5rem, 15px);
-  }
-}
-.overview__publisher:last-of-type, .overview__report-date-time:last-of-type, .overview__text:last-of-type {
-  border-bottom: 1px solid var(--font-color);
-}
-.overview__publisher {
-  grid-row: 1;
-}
-.overview__report-date-time {
-  grid-row: 2;
-}
-.overview__text {
-  grid-row: 3;
 }
 
 .recent {
@@ -820,7 +739,7 @@ a {
 }
 .recent__heading {
   grid-column: heading;
-  padding: 10px;
+  padding: 0.6rem;
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
   font-weight: 700;
@@ -828,12 +747,14 @@ a {
 }
 @media screen and (min-width: 768px) {
   .recent__heading {
+    padding: 0.8rem;
     font-size: clamp(13px, 1.3rem, 14px);
   }
 }
 @media screen and (min-width: 1024px) {
   .recent__heading {
-    font-size: clamp(13px, 1.4rem, 14px);
+    padding: 10px;
+    font-size: 13px;
   }
 }
 .recent__heading:last-of-type {
@@ -859,13 +780,13 @@ a {
   }
 }
 .recent__high {
-  color: #f00;
+  color: #ff2d11;
 }
 .recent__low {
-  color: #00f;
+  color: #0095ff;
 }
 .recent__date, .recent__weather, .recent__wave, .recent__pops, .recent__temps-max, .recent__temps-min {
-  padding: 10px;
+  padding: 0.6rem;
   display: grid;
   place-content: center;
   border-top: 1px solid var(--font-color);
@@ -897,11 +818,13 @@ a {
 }
 @media screen and (min-width: 768px) {
   .recent__date, .recent__weather, .recent__wave, .recent__pops, .recent__temps-max, .recent__temps-min {
+    padding: 0.8rem;
     font-size: clamp(12px, 1.2rem, 13px);
   }
 }
 @media screen and (min-width: 1024px) {
   .recent__date, .recent__weather, .recent__wave, .recent__pops, .recent__temps-max, .recent__temps-min {
+    padding: 10px;
     font-size: 13px;
   }
 }
@@ -929,10 +852,10 @@ a {
   gap: 0.5rem;
 }
 .recent__date-item.saturday {
-  color: #00f;
+  color: #0095ff;
 }
 .recent__date-item.sunday {
-  color: #f00;
+  color: #ff2d11;
 }
 .recent__weather {
   grid-row: weather;
@@ -948,11 +871,11 @@ a {
 }
 .recent__temps-max {
   grid-row: temps-max;
-  color: #f00;
+  color: #ff2d11;
 }
 .recent__temps-min {
   grid-row: temps-min;
-  color: #00f;
+  color: #0095ff;
   border-bottom: 1px solid var(--font-color);
 }
 
@@ -1009,7 +932,7 @@ a {
 }
 .weekly__heading {
   grid-column: heading;
-  padding: 10px;
+  padding: 0.6rem;
   border-top: 1px solid var(--font-color);
   border-left: 1px solid var(--font-color);
   font-weight: 700;
@@ -1017,12 +940,14 @@ a {
 }
 @media screen and (min-width: 768px) {
   .weekly__heading {
+    padding: 0.8rem;
     font-size: clamp(13px, 1.3rem, 14px);
   }
 }
 @media screen and (min-width: 1024px) {
   .weekly__heading {
-    font-size: clamp(13px, 1.4rem, 14px);
+    padding: 10px;
+    font-size: 13px;
   }
 }
 .weekly__heading:last-of-type {
@@ -1034,13 +959,13 @@ a {
   }
 }
 .weekly__high {
-  color: #f00;
+  color: #ff2d11;
 }
 .weekly__low {
-  color: #00f;
+  color: #0095ff;
 }
 .weekly__date, .weekly__weather, .weekly__reliability, .weekly__pops, .weekly__temps-max, .weekly__temps-min {
-  padding: 10px;
+  padding: 0.6rem;
   display: grid;
   place-content: center;
   border-top: 1px solid var(--font-color);
@@ -1049,11 +974,13 @@ a {
 }
 @media screen and (min-width: 768px) {
   .weekly__date, .weekly__weather, .weekly__reliability, .weekly__pops, .weekly__temps-max, .weekly__temps-min {
+    padding: 0.8rem;
     font-size: clamp(12px, 1.2rem, 13px);
   }
 }
 @media screen and (min-width: 1024px) {
   .weekly__date, .weekly__weather, .weekly__reliability, .weekly__pops, .weekly__temps-max, .weekly__temps-min {
+    padding: 10px;
     font-size: 13px;
   }
 }
@@ -1082,10 +1009,10 @@ a {
   grid-row: date;
 }
 .weekly__date.saturday {
-  color: #00f;
+  color: #0095ff;
 }
 .weekly__date.sunday {
-  color: #f00;
+  color: #ff2d11;
 }
 .weekly__weather {
   grid-row: weather;
@@ -1101,13 +1028,109 @@ a {
 }
 .weekly__temps-max {
   grid-row: temps-max;
-  color: #f00;
+  color: #ff2d11;
 }
 .weekly__temps-min {
   grid-row: temps-min;
-  color: #00f;
+  color: #0095ff;
   border-bottom: 1px solid var(--font-color);
 }
 .weekly .custom-scroll-hint-icon {
   background-color: #1bb4d4;
+}
+
+.overview {
+  margin-bottom: 2.4rem;
+}
+@media screen and (min-width: 768px) {
+  .overview {
+    margin-bottom: 3.2rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .overview {
+    margin-bottom: 4rem;
+  }
+}
+.overview__title {
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  font-size: clamp(14px, 1.4rem, 16px);
+}
+@media screen and (min-width: 768px) {
+  .overview__title {
+    margin-bottom: 1.6rem;
+    font-size: clamp(16px, 1.6rem, 20px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .overview__title {
+    margin-bottom: 2rem;
+    font-size: clamp(18px, 2rem, 20px);
+  }
+}
+.overview__table {
+  display: grid;
+  grid-template-columns: [heading] -webkit-max-content [description] 1fr;
+  grid-template-columns: [heading] max-content [description] 1fr;
+  grid-template-rows: repeat(3, -webkit-max-content);
+  grid-template-rows: repeat(3, max-content);
+}
+.overview__group {
+  display: contents;
+}
+.overview__heading {
+  grid-column: heading;
+  padding: 0.6rem;
+  border-left: 1px solid var(--font-color);
+  border-top: 1px solid var(--font-color);
+  font-weight: 700;
+  font-size: clamp(12px, 1.2rem, 13px);
+}
+@media screen and (min-width: 768px) {
+  .overview__heading {
+    padding: 0.8rem;
+    font-size: clamp(13px, 1.3rem, 14px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .overview__heading {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+.overview__heading:last-of-type {
+  border-bottom: 1px solid var(--font-color);
+}
+.overview__publisher, .overview__report-date-time, .overview__text {
+  grid-column: description;
+  padding: 0.6rem;
+  border-left: 1px solid var(--font-color);
+  border-right: 1px solid var(--font-color);
+  border-top: 1px solid var(--font-color);
+  font-size: clamp(12px, 1.2rem, 13px);
+}
+@media screen and (min-width: 768px) {
+  .overview__publisher, .overview__report-date-time, .overview__text {
+    padding: 0.8rem;
+    font-size: clamp(13px, 1.3rem, 14px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .overview__publisher, .overview__report-date-time, .overview__text {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+.overview__publisher:last-of-type, .overview__report-date-time:last-of-type, .overview__text:last-of-type {
+  border-bottom: 1px solid var(--font-color);
+}
+.overview__publisher {
+  grid-row: 1;
+}
+.overview__report-date-time {
+  grid-row: 2;
+}
+.overview__text {
+  grid-row: 3;
 }/*# sourceMappingURL=style.css.map */

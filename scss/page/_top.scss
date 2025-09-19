@@ -5,15 +5,16 @@
 }
 
 .top {
-  margin: 4rem 0 4rem;
+  @include section-margin;
+  margin-top: 2.4rem;
   position: relative;
 
   @include tab {
-    margin-bottom: 6rem 0 6rem;
+    margin-top: 3.2rem;
   }
 
   @include pc {
-    margin-bottom: 8rem 0 8rem;
+    margin-top: 4rem;
   }
 
   &__title {
@@ -146,12 +147,12 @@
     font-size: clamp(14px, 1.4rem, 16px);
 
     @include tab {
-      padding: 1.2rem 4.4rem 1.2rem 1.2rem;
+      padding: 1rem 4.4rem 1rem 1rem;
       font-size: clamp(16px, 1.6rem, 20px);
     }
 
     @include pc {
-      padding: 1.6rem 4.8rem 1.6rem 1.6rem;
+      padding: 1.2rem 4.8rem 1.2rem 1.2rem;
       font-size: clamp(18px, 2rem, 20px);
     }
   }
@@ -163,80 +164,6 @@
     &[selected][disabled] {
       display: none;
     }
-  }
-}
-
-.overview {
-  @include section-margin;
-
-  &__title {
-    @include section-title;
-  }
-
-  &__table {
-    display: grid;
-    grid-template-columns: [heading] max-content [description] 1fr;
-    grid-template-rows: repeat(3, max-content);
-  }
-
-  &__group {
-    display: contents;
-  }
-
-  &__heading {
-    grid-column: heading;
-    padding: 10px;
-    border-left: 1px solid var(--font-color);
-    border-top: 1px solid var(--font-color);
-    font-weight: 700;
-    font-size: clamp(12px, 1.2rem, 13px);
-
-    @include tab {
-      font-size: clamp(13px, 1.3rem, 14px);
-    }
-
-    @include pc {
-      font-size: clamp(14px, 1.5rem, 15px);
-    }
-
-    &:last-of-type {
-      border-bottom: 1px solid var(--font-color);
-    }
-  }
-
-  &__publisher,
-  &__report-date-time,
-  &__text {
-    grid-column: description;
-    padding: 10px;
-    border-left: 1px solid var(--font-color);
-    border-right: 1px solid var(--font-color);
-    border-top: 1px solid var(--font-color);
-    font-size: clamp(12px, 1.2rem, 13px);
-
-    @include tab {
-      font-size: clamp(13px, 1.3rem, 14px);
-    }
-
-    @include pc {
-      font-size: clamp(14px, 1.5rem, 15px);
-    }
-
-    &:last-of-type {
-      border-bottom: 1px solid var(--font-color);
-    }
-  }
-
-  &__publisher {
-    grid-row: 1;
-  }
-
-  &__report-date-time {
-    grid-row: 2;
-  }
-
-  &__text {
-    grid-row: 3;
   }
 }
 
@@ -259,18 +186,20 @@
 
   &__heading {
     grid-column: heading;
-    padding: 10px;
+    padding: 0.6rem;
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
     font-weight: 700;
     font-size: clamp(12px, 1.2rem, 13px);
 
     @include tab {
+      padding: 0.8rem;
       font-size: clamp(13px, 1.3rem, 14px);
     }
 
     @include pc {
-      font-size: clamp(13px, 1.4rem, 14px);
+      padding: 10px;
+      font-size: 13px;
     }
 
     &:last-of-type {
@@ -314,7 +243,7 @@
   &__pops,
   &__temps-max,
   &__temps-min {
-    padding: 10px;
+    padding: 0.6rem;
     display: grid;
     place-content: center;
     border-top: 1px solid var(--font-color);
@@ -347,10 +276,12 @@
     }
 
     @include tab {
+      padding: 0.8rem;
       font-size: clamp(12px, 1.2rem, 13px);
     }
 
     @include pc {
+      padding: 10px;
       font-size: 13px;
     }
 
@@ -442,18 +373,20 @@
 
   &__heading {
     grid-column: heading;
-    padding: 10px;
+    padding: 0.6rem;
     border-top: 1px solid var(--font-color);
     border-left: 1px solid var(--font-color);
     font-weight: 700;
     font-size: clamp(12px, 1.2rem, 13px);
 
     @include tab {
+      padding: 0.8rem;
       font-size: clamp(13px, 1.3rem, 14px);
     }
 
     @include pc {
-      font-size: clamp(13px, 1.4rem, 14px);
+      padding: 10px;
+      font-size: 13px;
     }
 
     &:last-of-type {
@@ -484,7 +417,7 @@
   &__pops,
   &__temps-max,
   &__temps-min {
-    padding: 10px;
+    padding: 0.6rem;
     display: grid;
     place-content: center;
     border-top: 1px solid var(--font-color);
@@ -492,10 +425,12 @@
     font-size: clamp(11px, 1.1rem, 12px);
 
     @include tab {
+      padding: 0.8rem;
       font-size: clamp(12px, 1.2rem, 13px);
     }
 
     @include pc {
+      padding: 10px;
       font-size: 13px;
     }
 
@@ -554,5 +489,83 @@
 
   .custom-scroll-hint-icon {
     background-color: $light-blue;
+  }
+}
+
+.overview {
+  @include section-margin;
+
+  &__title {
+    @include section-title;
+  }
+
+  &__table {
+    display: grid;
+    grid-template-columns: [heading] max-content [description] 1fr;
+    grid-template-rows: repeat(3, max-content);
+  }
+
+  &__group {
+    display: contents;
+  }
+
+  &__heading {
+    grid-column: heading;
+    padding: 0.6rem;
+    border-left: 1px solid var(--font-color);
+    border-top: 1px solid var(--font-color);
+    font-weight: 700;
+    font-size: clamp(12px, 1.2rem, 13px);
+
+    @include tab {
+      padding: 0.8rem;
+      font-size: clamp(13px, 1.3rem, 14px);
+    }
+
+    @include pc {
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    &:last-of-type {
+      border-bottom: 1px solid var(--font-color);
+    }
+  }
+
+  &__publisher,
+  &__report-date-time,
+  &__text {
+    grid-column: description;
+    padding: 0.6rem;
+    border-left: 1px solid var(--font-color);
+    border-right: 1px solid var(--font-color);
+    border-top: 1px solid var(--font-color);
+    font-size: clamp(12px, 1.2rem, 13px);
+
+    @include tab {
+      padding: 0.8rem;
+      font-size: clamp(13px, 1.3rem, 14px);
+    }
+
+    @include pc {
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    &:last-of-type {
+      border-bottom: 1px solid var(--font-color);
+    }
+  }
+
+  &__publisher {
+    grid-row: 1;
+  }
+
+  &__report-date-time {
+    grid-row: 2;
+  }
+
+  &__text {
+    grid-row: 3;
   }
 }
