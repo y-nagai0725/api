@@ -14,6 +14,7 @@
   }
 }
 
+//pc用hover
 @mixin hover {
   @media (any-hover: hover) {
     &:hover {
@@ -22,6 +23,7 @@
   }
 }
 
+//コンテンツ幅
 @mixin contents-width {
   padding: 0 2rem;
 
@@ -37,6 +39,7 @@
   }
 }
 
+//セクション共通margin
 @mixin section-margin {
   margin-bottom: 2.4rem;
 
@@ -49,6 +52,7 @@
   }
 }
 
+//セクション共通タイトルスタイル
 @mixin section-title {
   margin-bottom: 0.8rem;
   font-weight: 700;
