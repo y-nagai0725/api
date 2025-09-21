@@ -24,6 +24,16 @@ const darkModeButton = document.querySelector(".top__dark-mode-button");
 const prefecturesSelectBox = document.querySelector(".prefectures__select");
 
 /**
+ * 天気詳細データ取得APIのURL
+ */
+const detailWeatherDataApiUrl = "https://www.jma.go.jp/bosai/forecast/data/forecast";
+
+/**
+ * 天気概要データ取得APIのURL
+ */
+const overviewWeatherDataApiUrl = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast";
+
+/**
  * 曜日配列
  */
 const dayArray = ["日", "月", "火", "水", "木", "金", "土"];
@@ -198,7 +208,7 @@ function clearInputDetailWeatherData() {
     element.textContent = "";
   });
   document.querySelectorAll(".recent__weather-image").forEach(element => {
-    element.src = "";
+    element.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
     element.alt = "";
   });
   document.querySelectorAll(".recent__weather-text").forEach(element => {
@@ -226,7 +236,7 @@ function clearInputDetailWeatherData() {
     element.textContent = "";
   });
   document.querySelectorAll(".weekly__weather-image").forEach(element => {
-    element.src = "";
+    element.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
     element.alt = "";
   });
   document.querySelectorAll(".weekly__weather-text").forEach(element => {
@@ -279,7 +289,7 @@ function convertDateFormattedString(timeDefine, needsTimeString = false) {
  * @param {String} cityNumber 都道府県コード
  */
 function getDetailWeatherData(cityNumber) {
-  fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${cityNumber}.json`)
+  fetch(`${detailWeatherDataApiUrl}/${cityNumber}.json`)
     .then(response => response.json())
     .then(data => {
       //発表時刻
@@ -541,7 +551,7 @@ function getDetailWeatherData(cityNumber) {
  * @param {String} cityNumber 都道府県コード
  */
 function getOverviewWeatherData(cityNumber) {
-  fetch(`https://www.jma.go.jp/bosai/forecast/data/overview_forecast/${cityNumber}.json`)
+  fetch(`${overviewWeatherDataApiUrl}/${cityNumber}.json`)
     .then(response => response.json())
     .then(data => {
       //観測気象台
