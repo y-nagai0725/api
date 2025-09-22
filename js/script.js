@@ -231,7 +231,7 @@ function clearInputDetailWeatherData() {
   document.querySelectorAll(".recent__temps-min").forEach(element => {
     element.textContent = "";
   });
-  setRecentTableStyle();
+  disableRecentTableStyle(false);
 
   //weekly部分
   document.querySelectorAll(".weekly__prefectural-capital").forEach(element => {
@@ -290,9 +290,31 @@ function convertDateFormattedString(timeDefine, needsTimeString = false) {
 }
 
 /**
+ * 直近の天気予報表のスタイル設定
+ * @param {boolean} disabled 非表示設定するかどうか
+ */
+function disableRecentTableStyle(disabled = true) {
+  if (disabled) {
+    document.querySelector(".recent__date").classList.add("disabled");
+    document.querySelector(".recent__weather").classList.add("disabled");
+    document.querySelector(".recent__wave").classList.add("disabled");
+    document.querySelector(".recent__pops").classList.add("disabled");
+    document.querySelector(".recent__temps-max").classList.add("disabled");
+    document.querySelector(".recent__temps-min").classList.add("disabled");
+  } else {
+    document.querySelector(".recent__date").classList.remove("disabled");
+    document.querySelector(".recent__weather").classList.remove("disabled");
+    document.querySelector(".recent__wave").classList.remove("disabled");
+    document.querySelector(".recent__pops").classList.remove("disabled");
+    document.querySelector(".recent__temps-max").classList.remove("disabled");
+    document.querySelector(".recent__temps-min").classList.remove("disabled");
+  }
+}
+
+/**
  * 指定セレクターの要素に、配列のテキストを順番にセットする
- * @param {string} selector - CSSセレクター
- * @param {Array<string>} textValues - セットしたいテキストの配列
+ * @param {string} selector CSSセレクター
+ * @param {Array<string>} textValues セットしたいテキストの配列
  */
 function setTextValues(selector, textValues) {
   const elements = document.querySelectorAll(selector);
@@ -304,8 +326,8 @@ function setTextValues(selector, textValues) {
 
 /**
  * 指定セレクターの要素に、配列の日付値を順番にセットする
- * @param {string} selector - CSSセレクター
- * @param {Array<string>} dateValues - セットしたい日付値の配列
+ * @param {string} selector CSSセレクター
+ * @param {Array<string>} dateValues セットしたい日付値の配列
  */
 function setDateValues(selector, dateValues) {
   const elements = document.querySelectorAll(selector);
@@ -346,6 +368,174 @@ function setWeatherInfo(areaPrefix, weatherCodesArray) {
 }
 
 /**
+ * 表示用データを作成
+ * @param {*} data 天気詳細APIで取得したデータ
+ * @returns 表示用の直近の天気予報データと週間天気予報データ
+ */
+function parseDetailWeatherData(data) {
+  //観測発表時刻
+  const reportDatetime = data[0].reportDatetime;
+  let reportDatetimeType;
+  if (reportDatetime.includes("T05")) {
+    reportDatetimeType = 1;
+  } else if (reportDatetime.includes("T11") || reportDatetime.includes("T12")) {
+    reportDatetimeType = 2;
+  } else {
+    //T17,T21,T22
+    reportDatetimeType = 3;
+  }
+
+  //今日
+  const today = data[0].timeSeries[0].timeDefines[0];
+
+  //明日
+  const tomorrow = data[0].timeSeries[0].timeDefines[1];
+
+  //直近データ：天気
+  const todayWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[0];
+  const tomorrowWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[1];
+
+  //直近データ：風速
+  let todayWave = "-", tomorrowWave = "-";
+  if (data[0].timeSeries[0].areas[0].waves) {
+    todayWave = data[0].timeSeries[0].areas[0].waves[0];
+    tomorrowWave = data[0].timeSeries[0].areas[0].waves[1];
+  }
+
+  //直近データ：降水確率
+  const popsTimeDefines = data[0].timeSeries[1].timeDefines;
+  const pops = data[0].timeSeries[1].areas[0].pops;
+  let todayPops, tomorrowPops;
+  if (popsTimeDefines[0].includes("T00")) {
+    todayPops = `${pops[0]} / ${pops[1]} / ${pops[2]} / ${pops[3]}`;
+    tomorrowPops = `${pops[4]} / - / - / -`;
+  } else if (popsTimeDefines[0].includes("T06")) {
+    todayPops = `- / ${pops[0]} / ${pops[1]} / ${pops[2]}`;
+    tomorrowPops = `${pops[3]} / ${pops[4]} / ${pops[5]} / ${pops[6]}`;
+  } else if (popsTimeDefines[0].includes("T12")) {
+    todayPops = `- / - / ${pops[0]} / ${pops[1]}`;
+    tomorrowPops = `${pops[2]} / ${pops[3]} / ${pops[4]} / ${pops[5]}`;
+  } else {
+    todayPops = `- / - / - / ${pops[0]}`;
+    tomorrowPops = `${pops[1]} / ${pops[2]} / ${pops[3]} / ${pops[4]}`;
+  }
+
+  //直近データ：最高気温、最低気温
+  let todayTempMax, tomorrowTempMax;
+  let todayTempMin, tomorrowTempMin;
+  if (reportDatetimeType === 1) {
+    todayTempMax = data[0].timeSeries[2].areas[0].temps[0];
+    todayTempMin = "-";
+    tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[3];
+    tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[2];
+  } else if (reportDatetimeType === 2) {
+    todayTempMax = data[0].timeSeries[2].areas[0].temps[0];
+    todayTempMin = "-";
+    tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[3];
+    tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[2];
+  } else {
+    todayTempMax = "-";
+    todayTempMin = "-";
+    tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[1];
+    tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[0];
+  }
+
+  return {
+    recent: { //直近の天気予報データ
+      dates: [today, tomorrow],
+      weatherCodes: [todayWeatherCode, tomorrowWeatherCode],
+      waves: [todayWave, tomorrowWave],
+      pops: [todayPops, tomorrowPops],
+      tempsArea: data[0].timeSeries[2].areas[0].area.name,
+      tempsMax: [todayTempMax, tomorrowTempMax],
+      tempsMin: [todayTempMin, tomorrowTempMin],
+    },
+    weekly: { //週間天気予報データ
+      dates: data[1].timeSeries[0].timeDefines.slice(1),
+      weatherCodes: data[1].timeSeries[0].areas[0].weatherCodes.slice(1),
+      reliabilities: data[1].timeSeries[0].areas[0].reliabilities.slice(1),
+      pops: data[1].timeSeries[0].areas[0].pops.slice(1),
+      tempsArea: data[1].timeSeries[1].areas[0].area.name,
+      tempsMax: data[1].timeSeries[1].areas[0].tempsMax.slice(1),
+      tempsMin: data[1].timeSeries[1].areas[0].tempsMin.slice(1),
+    }
+  };
+}
+
+/**
+ * 直近と週間天気予報データを表示する
+ * @param {*} weatherData 表示用天気予報データ
+ */
+function displayDetailWeatherData(weatherData) {
+  //---直近の天気予報を表示----
+  //直近データ：日付表示
+  setDateValues(".recent__date-item", weatherData.recent.dates);
+
+  //直近データ：日付ラベル（今日or明日）表示
+  document.querySelectorAll(".recent__date-label").forEach((label, index) => {
+    if (index === 0) {
+      const today = weatherData.recent.dates[0];
+      if (convertDateFormattedString(today) === convertDateFormattedString(new Date())) {
+        label.textContent = "今日";
+        disableRecentTableStyle(false);
+      } else {
+        label.textContent = "昨日";
+        disableRecentTableStyle();
+      }
+    } else if (index === 1) {
+      const tomorrow = weatherData.recent.dates[1];
+      const tomorrowDate = new Date();
+      tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+      if (convertDateFormattedString(tomorrow) === convertDateFormattedString(new Date())) {
+        label.textContent = "今日";
+      } else if (convertDateFormattedString(tomorrow) === convertDateFormattedString(tomorrowDate)) {
+        label.textContent = "明日";
+      }
+    }
+  });
+
+  //直近データ：天気画像、天気テキスト表示
+  setWeatherInfo("recent", weatherData.recent.weatherCodes);
+
+  //直近データ：風速表示
+  setTextValues(".recent__wave", weatherData.recent.waves);
+
+  //直近データ：降水確率表示
+  setTextValues(".recent__pops", weatherData.recent.pops);
+
+  //直近データ：県庁所在地を表示
+  setTextValues(".recent__prefectural-capital", [weatherData.recent.tempsArea, weatherData.recent.tempsArea]);
+
+  //直近データ：最高気温表示
+  setTextValues(".recent__temps-max", weatherData.recent.tempsMax);
+
+  //直近データ：最低気温表示
+  setTextValues(".recent__temps-min", weatherData.recent.tempsMin);
+
+  //---週間天気予報を表示---
+  //週間予報データ：日付表示
+  setDateValues(".weekly__date", weatherData.weekly.dates);
+
+  //週間予報データ：天気画像、天気テキスト表示
+  setWeatherInfo("weekly", weatherData.weekly.weatherCodes);
+
+  //週間予報データ：信頼度表示
+  setTextValues(".weekly__reliability", weatherData.weekly.reliabilities);
+
+  //週間予報データ：降水確率表示
+  setTextValues(".weekly__pops", weatherData.weekly.pops);
+
+  //週間予報データ：県庁所在地を表示
+  setTextValues(".weekly__prefectural-capital", [weatherData.weekly.tempsArea, weatherData.weekly.tempsArea]);
+
+  //週間予報データ：最高気温表示
+  setTextValues(".weekly__temps-max", weatherData.weekly.tempsMax);
+
+  //週間予報データ：最低気温表示
+  setTextValues(".weekly__temps-min", weatherData.weekly.tempsMin);
+}
+
+/**
  * 天気詳細を取得、表示
  * @param {String} cityNumber 都道府県コード
  */
@@ -353,152 +543,11 @@ function getDetailWeatherData(cityNumber) {
   fetch(`${detailWeatherDataApiUrl}/${cityNumber}.json`)
     .then(response => response.json())
     .then(data => {
-      //発表時刻
-      const reportDatetime = data[0].reportDatetime;
-      let reportDatetimeType;
-      if (reportDatetime.includes("T05")) {
-        reportDatetimeType = 1;
-      } else if (reportDatetime.includes("T11") || reportDatetime.includes("T12")) {
-        reportDatetimeType = 2;
-      } else {
-        //T17,T21,T22
-        reportDatetimeType = 3;
-      }
+      //表示用天気予報データ
+      const weatherData = parseDetailWeatherData(data);
 
-      //今日
-      const today = data[0].timeSeries[0].timeDefines[0];
-
-      //明日
-      const tomorrow = data[0].timeSeries[0].timeDefines[1];
-
-      //直近データ：天気
-      const todayWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[0];
-      const tomorrowWeatherCode = data[0].timeSeries[0].areas[0].weatherCodes[1];
-
-      //直近データ：風速
-      let todayWave, tomorrowWave;
-      if (!data[0].timeSeries[0].areas[0].waves) {
-        todayWave = "-";
-        tomorrowWave = "-";
-      } else {
-        todayWave = data[0].timeSeries[0].areas[0].waves[0];
-        tomorrowWave = data[0].timeSeries[0].areas[0].waves[1];
-      }
-
-      //直近データ：降水確率
-      const popsTimeDefines = data[0].timeSeries[1].timeDefines;
-      const pops = data[0].timeSeries[1].areas[0].pops;
-      let todayPops, tomorrowPops;
-      if (popsTimeDefines[0].includes("T00")) {
-        todayPops = `${pops[0]} / ${pops[1]} / ${pops[2]} / ${pops[3]}`;
-        tomorrowPops = `${pops[4]} / - / - / -`;
-      } else if (popsTimeDefines[0].includes("T06")) {
-        todayPops = `- / ${pops[0]} / ${pops[1]} / ${pops[2]}`;
-        tomorrowPops = `${pops[3]} / ${pops[4]} / ${pops[5]} / ${pops[6]}`;
-      } else if (popsTimeDefines[0].includes("T12")) {
-        todayPops = `- / - / ${pops[0]} / ${pops[1]}`;
-        tomorrowPops = `${pops[2]} / ${pops[3]} / ${pops[4]} / ${pops[5]}`;
-      } else {
-        todayPops = `- / - / - / ${pops[0]}`;
-        tomorrowPops = `${pops[1]} / ${pops[2]} / ${pops[3]} / ${pops[4]}`;
-      }
-
-      //直近データ：最高気温、最低気温
-      let todayTempMax, tomorrowTempMax;
-      let todayTempMin, tomorrowTempMin;
-      if (reportDatetimeType === 1) {
-        todayTempMax = data[0].timeSeries[2].areas[0].temps[0];
-        todayTempMin = "-";
-        tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[3];
-        tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[2];
-      } else if (reportDatetimeType === 2) {
-        todayTempMax = data[0].timeSeries[2].areas[0].temps[0];
-        todayTempMin = "-";
-        tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[3];
-        tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[2];
-      } else {
-        todayTempMax = "-";
-        todayTempMin = "-";
-        tomorrowTempMax = data[0].timeSeries[2].areas[0].temps[1];
-        tomorrowTempMin = data[0].timeSeries[2].areas[0].temps[0];
-      }
-
-      //直近データ：日付ラベル（今日or明日）表示
-      document.querySelectorAll(".recent__date-label").forEach((label, index) => {
-        if (index === 0) {
-          if (convertDateFormattedString(today) === convertDateFormattedString(new Date())) {
-            label.textContent = "今日";
-            setRecentTableStyle();
-          } else {
-            label.textContent = "昨日";
-            setRecentTableStyle(true);
-          }
-        } else if (index === 1) {
-          const tomorrowDate = new Date();
-          tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-          if (convertDateFormattedString(tomorrow) === convertDateFormattedString(new Date())) {
-            label.textContent = "今日";
-          } else if (convertDateFormattedString(tomorrow) === convertDateFormattedString(tomorrowDate)) {
-            label.textContent = "明日";
-          }
-        }
-      });
-
-      //直近データ：日付表示
-      const recentDates = [today, tomorrow];
-      setDateValues(".recent__date-item", recentDates);
-
-      //直近データ：天気、天気テキスト
-      const recentWeatherCodes = [todayWeatherCode, tomorrowWeatherCode];
-      setWeatherInfo("recent", recentWeatherCodes);
-
-      //直近データ：降水確率表示
-      const recentPops = [todayPops, tomorrowPops];
-      setTextValues(".recent__pops", recentPops);
-
-      //直近データ：風速表示
-      const recentWaves = [todayWave, tomorrowWave];
-      setTextValues(".recent__wave", recentWaves);
-
-      //直近データ：県庁所在地を表示
-      const recentTempsArea = data[0].timeSeries[2].areas[0].area.name;
-      setTextValues(".recent__prefectural-capital", [recentTempsArea, recentTempsArea]);
-
-      //直近データ：最高気温表示
-      const recentTempsMax = [todayTempMax, tomorrowTempMax];
-      setTextValues(".recent__temps-max", recentTempsMax);
-
-      //直近データ：最低気温表示
-      const recentTempsMin = [todayTempMin, tomorrowTempMin];
-      setTextValues(".recent__temps-min", recentTempsMin);
-
-      //週間予報データ：日付表示
-      const weeklyTimeDefines = data[1].timeSeries[0].timeDefines.slice(1);
-      setDateValues(".weekly__date", weeklyTimeDefines);
-
-      //週間予報データ：天気画像表示
-      const weeklyWeatherCodes = data[1].timeSeries[0].areas[0].weatherCodes.slice(1);
-      setWeatherInfo("weekly", weeklyWeatherCodes);
-
-      //週間予報データ：信頼度表示
-      const weeklyReliabilities = data[1].timeSeries[0].areas[0].reliabilities.slice(1);
-      setTextValues(".weekly__reliability", weeklyReliabilities);
-
-      //週間予報データ：降水確率表示
-      const weeklyPops = data[1].timeSeries[0].areas[0].pops.slice(1);
-      setTextValues(".weekly__pops", weeklyPops);
-
-      //週間予報データ：県庁所在地表示
-      const weeklyTempsArea = data[1].timeSeries[1].areas[0].area.name;
-      setTextValues(".weekly__prefectural-capital", [weeklyTempsArea, weeklyTempsArea]);
-
-      //週間予報データ：最高気温表示
-      const weeklyTempsMax = data[1].timeSeries[1].areas[0].tempsMax.slice(1);
-      setTextValues(".weekly__temps-max", weeklyTempsMax);
-
-      //週間予報データ：最低気温表示
-      const weeklyTempsMin = data[1].timeSeries[1].areas[0].tempsMin.slice(1);
-      setTextValues(".weekly__temps-min", weeklyTempsMin);
+      //直近と週間天気予報データを表示
+      displayDetailWeatherData(weatherData);
     })
     .catch(error => {
       console.error("地域コード:" + cityNumber + "の天気詳細データ取得にてエラーが発生しています。", error);
@@ -533,28 +582,6 @@ function getOverviewWeatherData(cityNumber) {
       console.error("地域コード:" + cityNumber + "の天気概要データ取得にてエラーが発生しています。", error);
       clearInputOverviewWeatherData();
     });
-}
-
-/**
- * 直近の天気予報表のスタイル設定
- * @param {boolean} disabled 非表示設定するかどうか
- */
-function setRecentTableStyle(disabled = false) {
-  if (disabled) {
-    document.querySelector(".recent__date").classList.add("disabled");
-    document.querySelector(".recent__weather").classList.add("disabled");
-    document.querySelector(".recent__wave").classList.add("disabled");
-    document.querySelector(".recent__pops").classList.add("disabled");
-    document.querySelector(".recent__temps-max").classList.add("disabled");
-    document.querySelector(".recent__temps-min").classList.add("disabled");
-  } else {
-    document.querySelector(".recent__date").classList.remove("disabled");
-    document.querySelector(".recent__weather").classList.remove("disabled");
-    document.querySelector(".recent__wave").classList.remove("disabled");
-    document.querySelector(".recent__pops").classList.remove("disabled");
-    document.querySelector(".recent__temps-max").classList.remove("disabled");
-    document.querySelector(".recent__temps-min").classList.remove("disabled");
-  }
 }
 
 /**
