@@ -602,12 +602,13 @@ function init() {
   if (selectedCity) {
     getOverviewWeatherData(selectedCity);
     getDetailWeatherData(selectedCity);
-    Array.from(prefecturesSelectBox.options).forEach(option => {
-      const value = option.value;
-      if (selectedCity === value) {
+
+    for (const option of prefecturesSelectBox.options) {
+      if (selectedCity === option.value) {
         option.selected = true;
+        break;
       }
-    });
+    }
   }
 
   //週間天気予報表にスクロールヒントを設定
